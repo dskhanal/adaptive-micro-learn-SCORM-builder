@@ -56,7 +56,9 @@ async function launch(resume){
 async function load(){
  try{pkg=await ScormFiles.get(id);if(!pkg)throw Error('Course files unavailable. Use Test in the builder or load a SCORM folder.');
  project=JSON.parse(new TextDecoder().decode(pkg.files['course.json']||new TextEncoder().encode('{}')));
- await ScormFiles.ready();$('title').textContent=pkg.title;$('save').disabled=false;populate();await launch(false);
+ const projectTitle=project.title||pkg.title||'Course test';
+ $('title').textContent=[project.code,projectTitle].filter(Boolean).join(' ');document.title=projectTitle;
+ await ScormFiles.ready();$('save').disabled=false;populate();await launch(false);
  }catch(error){notice(error.message)}
 }
 $('folder').onchange=async event=>{

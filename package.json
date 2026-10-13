@@ -1,10 +1,11 @@
 {
   "name": "adaptive-micro-learn-scorm-builder",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "description": "Static SCORM authoring, finalisation and folder testing",
   "scripts": {
-    "start": "python3 -m http.server 8000"
+    "start": "python3 -m http.server 8000",
+    "test": "node tests/run.cjs"
   }
 }

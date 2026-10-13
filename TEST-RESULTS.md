@@ -30,3 +30,37 @@
 7. Confirm Reload Example: check the project JSON downloads first.
 8. Export SCORM and verify its original LMS launcher is retained.
 9. Test the exported ZIP in the destination LMS.
+
+## 1.2.1 interface adjustment
+
+Moved the code/title header to the test sidebar and set the browser title from the project title. Removed the builder save-state element. Toolbar group labels now use white on the dark navigation background. Checked markup placement and JavaScript syntax; full browser rendering remains unverified.
+
+## 2.0 authoring evolution
+
+Passed:
+
+- Seven-stage stepper tree and all 26 current validation checks rendered with navigation actions.
+- Draft placeholders remained incomplete; editing a reviewed project invalidated its preview-review fingerprint.
+- Module and question movement preserved IDs, unrelated pools, references and selected-item identity.
+- In-memory learner simulation graded correct answers at 100% for all 11 existing interaction types.
+- Incorrect multiple-choice feedback/remediation and partial-credit sorting/sequencing scores matched the learner runtime.
+- Safe formatting escaped raw HTML and rendered the supported bold/italic/code subset.
+- Completed-project SCORM file generation and ZIP file contents matched; test-only navigation injection still worked without changing saved course bytes.
+- New JavaScript syntax checks passed. Reproducible component and simulation tests are included under tests/.
+
+Limits:
+
+- Component tests and simulation tests use DOM doubles, not a full browser.
+- Responsive layout, visual appearance, drag-and-drop gestures, cursor preservation, assistive-technology behaviour and real-browser preview latency remain unverified.
+- No sub-100ms or 16ms timing guarantee is claimed.
+- Distractor plausibility is explicitly an author-review task; duplicate/empty choice detection is only a structural aid.
+- Destination LMS acceptance remains necessary.
+
+Suggested browser acceptance:
+
+1. Navigate all seven stages using both stepper and Previous/Next controls.
+2. Edit a module tier with bold text and Greek symbols; check single and four-tier comparison views.
+3. Reorder modules/questions with drag handles and keyboard Up/Down controls; save/import and confirm order.
+4. Edit and answer each interaction type. Verify immediate feedback, remediation and Reset answer.
+5. Mark design preview reviewed, edit content, and confirm that review becomes incomplete.
+6. Use Test and Export; verify the independent Test window, retained export launcher and formatting inside the course.

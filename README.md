@@ -1,4 +1,4 @@
-# Adaptive SCORM Studio — authoring and separate test window
+# Adaptive SCORM Studio 2.0 — guided authoring and live simulation
 
 ## Start
 
@@ -83,3 +83,54 @@ Projects, test snapshots and attempt data are stored in this browser. Keep downl
 This is a single-SCO author test harness, not a full LMS or SCORM conformance validator. Perform acceptance testing in the destination LMS. External hosted media and configured xAPI services still require their connections. Only test course packages you trust, because their scripts execute on the test site's origin.
 
 The original authoring source was not supplied: the compiled UI bundle is retained, with readable supporting scripts. See TEST-RESULTS.md for checks and remaining limitations.
+
+
+## Guided authoring (2.0)
+
+The seven stages remain freely accessible from the top stepper. Previous/Next controls stay at the bottom. Status rings and counters update with your edits; the expandable readiness checklist links each validation check to its relevant stage.
+
+This build exposes the existing **26 checks**, rather than reducing the validator to the plan's proposed 15. Placeholder text remains draft content. Design preview has a Mark design preview reviewed action; later project edits invalidate that review. Structural readiness does not certify instructional accuracy or SCORM conformance.
+
+### Module workspace
+
+Stage 04 has an editor and live preview side by side. Select Essential or any mastery tier, edit content/style/media, and inspect its learner card immediately. Mastery comparison shows four tiers in a two-by-two matrix; narrow screens stack them. Checkpoint editing and interactive simulation follow the selected tier. Course content styles and the theme remain independent of the studio's slate/blue interface.
+
+### Assessment workspace
+
+Stage 05 retains Diagnostic and Final pools and all eleven existing interaction types. Select a question, edit it on the left, and answer it on the right. The preview uses the actual learner rendering and grading code with storage and LMS writes disabled. Feedback and remediation appear when you submit; Continue reports the simulated score. Reset answer clears only the simulation. Editing the question resets its simulated answer.
+
+Analytics show prompt word count, tier, domain coverage, distractor count, duplicate choice text and empty choices. **Plausibility remains an author-review item**: text structure cannot establish whether a distractor is educationally plausible or discriminates between learners.
+
+### Reordering
+
+Drag the dotted handle on a module/question card onto another card, or use its Up/Down buttons. Reordering preserves item IDs, links and current selection. The deck is horizontally scrollable; keyboard buttons provide the accessible alternative to dragging.
+
+### Formatting and mathematics
+
+Module content and question prompt/feedback/remediation fields have bold, italic, inline-code and mathematical symbol tools. Ctrl/Cmd+B and Ctrl/Cmd+I format the selection. Symbols insert at the current cursor; superscript/subscript conversion supports selected digits and arithmetic characters, with additional Unicode symbols in the palette.
+
+Supported portable markup: **bold**, *italic*, and inline code. Raw HTML is escaped. The same formatter ships inside the course runtime, so exported content keeps its formatting without a LaTeX/CDN dependency.
+
+### Performance and architecture
+
+Author previews update in memory through React-managed panes. The question form itself is mounted in a ShadowRoot using the real learner renderer, preventing studio CSS from altering the question UI. This deliberately reuses its tested interaction/scoring logic instead of building a second, potentially different React-only grader. There is no preview iframe, ZIP creation or LMS write per keystroke. The separate Test window still builds a course snapshot; Export retains its original LMS staging page.
+
+The under-100ms preview target is a design target, not a measured guarantee in this environment. Larger media, custom CSS and slower computers may affect rendering.
+
+New readable source files:
+
+- studio-evolution.js: wizard, readiness, editors, reordering, math tools and simulation host.
+- studio-evolution.css: responsive studio layout and controls.
+- studio-formatting.js: safe portable inline formatting.
+- learner-simulation.js: learner question runtime with course startup/storage disabled.
+- tests/: dependency-free component/model and learner-simulation regression checks.
+
+The supplied compiled UI is still the integration point. If changing learner grading in the compiled runtime, regenerate learner-simulation.js from the matching runtime and rerun the simulation tests to prevent divergence.
+
+Fonts use local fallbacks: Plus Jakarta Sans / DM Sans / system UI, and JetBrains Mono / system monospace for formula controls. No external font downloads are required.
+
+Run the included checks with Node.js:
+
+    node tests/run.cjs
+
+These use component trees and DOM test doubles; they do not replace real-browser visual or accessibility testing.
