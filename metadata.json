@@ -1,0 +1,7 @@
+{
+  "name": "Adaptive SCORM Studio",
+  "description": "Create, validate, preview and export adaptive SCORM 2004 learning packages.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
