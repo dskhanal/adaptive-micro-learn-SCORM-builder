@@ -42,7 +42,12 @@ globalThis.ScormFiles = (() => {
   }
   async function ready() {
     if(!('serviceWorker' in navigator)) throw Error('Use localhost or HTTPS to test finalised folders.');
-    await navigator.serviceWorker.register('./package-worker.js');
+    const registration=await navigator.serviceWorker.register('./package-worker.js');
+    const updating=registration.installing||registration.waiting;
+    if(updating&&updating.state!=='activated')await new Promise((resolve,reject)=>{
+      const changed=()=>{if(updating.state==='activated')resolve();else if(updating.state==='redundant')reject(Error('Test player worker update failed. Reload this window.'))};
+      updating.addEventListener('statechange',changed);changed();
+    });
     await navigator.serviceWorker.ready;
     if(!navigator.serviceWorker.controller) await new Promise(resolve=>navigator.serviceWorker.addEventListener('controllerchange',resolve,{once:true}));
   }

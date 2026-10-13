@@ -3195,11 +3195,18 @@
 };
 
   window.tempPublishAndOpenPlayer = async function(project) {
+    // Open during the click, before async generation, to preserve the user gesture.
+    const player=window.open('about:blank','_blank','popup=yes,width=1440,height=920,resizable=yes,scrollbars=yes');
+    if(!player){alert('Allow pop-ups for this site to open the separate Test window.');return;}
+    player.document.title='Preparing course test';
+    player.document.body.textContent='Preparing course files for testing…';
     try {
-      if (!project) throw new Error("No project selected.");
-      const files = await window.__buildFinalFiles(JSON.parse(JSON.stringify(project)));
-      const id = await ScormFiles.save(files);
-      location.href = "./test-player.html?id=" + encodeURIComponent(id);
-    } catch (error) { alert("Could not finalise course: " + error.message); }
+      if (!project) throw new Error('No project selected.');
+      const files=await window.__buildFinalFiles(JSON.parse(JSON.stringify(project)),{draft:true});
+      const id=await ScormFiles.save(files);
+      if(!player.closed)player.location.replace(new URL('./test-player.html?id='+encodeURIComponent(id),location.href).href);
+    } catch(error) {
+      if(!player.closed)player.document.body.textContent='Could not prepare course test: '+error.message;
+    }
   };
 })();

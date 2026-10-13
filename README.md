@@ -1,56 +1,85 @@
-# Adaptive SCORM Studio — static folder workflow
-
-No PHP configuration, project API, upload endpoint, npm installation or Node server is required.
+# Adaptive SCORM Studio — authoring and separate test window
 
 ## Start
 
-Extract the complete application, then run this command from its folder:
+Extract this complete package. From its folder, run:
 
     python3 -m http.server 8000
 
-Open http://localhost:8000/ in Chrome or Edge.
+Open http://localhost:8000/ in Chrome or Edge. HTTPS static hosting also works, including a subfolder. No PHP, project-storage API, upload server or npm installation is required. Opening the application with a file:// URL is not supported.
 
-You can also use HTTPS static hosting, including a subfolder. The test player needs localhost or HTTPS for its service worker. Double-clicking index.html with a file:// URL is not supported.
+## Top toolbar
 
-## Author → finalise → test → package
+**Project Files JSON**: Import · Save
 
-1. Author or import your course. Save stores a browser copy and downloads a project JSON backup.
-2. Select **Finalise & test** on Overview, or **Finalise & test SCORM** in Design preview.
-3. The builder validates the project and creates the complete SCORM file set. The player reads those saved bytes through a browser-local virtual folder. No upload occurs.
-4. In the test player, use the course launcher's **Open Course Window** button. Allow its popup and keep the launcher open.
-5. Complete activities. Inspect completion, success, score and recorded SCORM calls. **Download test data** saves the attempt records.
-6. Close the course popup before choosing **Resume attempt** or **New attempt**. Resume restores the last committed tracking state; New attempt starts fresh.
-7. **Save finalised folder** writes the exact tested bytes into a uniquely named subfolder of a folder you choose. Chrome/Edge on localhost or HTTPS is required for this folder-writing feature.
-8. ZIP the contents of that saved course folder, with imsmanifest.xml at the ZIP root, and upload to your LMS.
+A divider separates it from **SCORM**: Test · Export.
 
-You may instead use **Export SCORM** in the builder. With the same unchanged project it generates the same course file contents. To package precisely what you tested after further editor changes, use the saved finalised folder.
+- Import loads a project JSON (existing project ZIP imports remain supported).
+- Save stores the project in this browser and downloads a JSON backup.
+- Test opens a separate window and leaves the builder open with its current project and page unchanged. Allow popups for this site.
+- Export validates the authored project and downloads its SCORM ZIP. The exported LMS launcher/staging page is unchanged.
 
-## Test an existing extracted folder
+JSON backups, SCORM ZIPs and test-data downloads use the project title and a local numeric timestamp including seconds and milliseconds:
 
-Open test-player.html and use **Load SCORM folder**. Select the folder containing imsmanifest.xml; the player imports the file bytes locally and launches the manifest's first item resource.
+    My-project_Project_20261013214141023.json
+    My-project_SCORM_20261013214142204.zip
 
-Folder testing is intended for this builder's single-SCO SCORM 2004 output. It also exposes a basic SCORM 1.2 API for simple packages, but does not implement multi-SCO sequencing or certify SCORM conformance.
+The timestamp format is YYYYMMDDHHmmssSSS, using the browser's local time. Milliseconds and a monotonic per-window timestamp help distinguish rapid repeated downloads.
 
-Finalised test copies and attempts persist in this browser. Clearing site data removes them. Keep downloaded project backups and saved course folders.
+## Test window
 
-## Files
+The left sidebar contains:
 
-- index.html, assets/: authoring application.
-- preview-bridge.js: starter content and finalisation entry point.
-- package-store.js: finalised byte storage and manifest launch resolution.
-- package-worker.js: serves saved course files locally, preserving relative asset paths.
-- test-player.html, test-player.js: standalone folder test harness.
-- statistics_starter.json: example project.
+- New attempt and Resume attempt.
+- Jump to role, module and level.
+- Skip restrictions On/Off and Skip current step.
+- Download test data.
+- Completion, success, score and Recorded SCORM calls.
+- A collapsible Course files section for loading an existing folder or saving the finalised files.
 
-The finalised course contains imsmanifest.xml, index.html, player.html, runtime.css, scorm.js, course.js, runtime.js, course.json, project.json and README.txt. Only the course files go into the LMS ZIP, not the builder or test harness.
+The right frame loads this builder's course content page directly. It does not open the exported staging page or a second course popup.
 
-## Limits and checks
+Skip restrictions starts Off. Normal learner progression applies. Restricted jumps explain why they cannot proceed. With it On, authors can inspect any role/module/level and skip steps without selecting correct answers. These controls do not award correct responses or passing marks; skipped final questions remain unanswered. Reports identify attempts that used bypass controls. Use New attempt to check the normal learner path again.
 
-- The test harness records calls and supports commit/resume, completion and score inspection. It is not a full LMS data-model validator or conformance suite.
-- Hosted media, embedded players and configured xAPI services still require their external connections.
-- Load only course packages you trust: course scripts run on the test site's origin.
-- Browser folder selection imports a snapshot. Select the folder again after editing files outside the app.
-- Perform the final acceptance test in your destination LMS.
-- The supplied project contains a compiled UI bundle rather than its original authoring source. This update preserves that bundle and adds readable, separate folder-player scripts.
+Resume attempt restores committed SCORM state for the current test snapshot. A new Test from the builder creates a separate snapshot and attempt. The on-screen log shows the most recent 150 calls; downloaded test data includes the full call log.
 
-See TEST-RESULTS.md for the checks completed with this update.
+Jump controls support this builder's runtime. An imported third-party SCORM folder can use the basic test API, but may not support these controls or direct-content launch.
+
+## Work in progress and placeholders
+
+Start blank creates an editable course with:
+
+- Course identity and cover text.
+- A role and module, including essential content and all four learning levels.
+- Four checkpoint questions.
+- Four diagnostic questions, one per level.
+- A final assessment question, feedback and remediation text.
+- Theme/style defaults and an editable source placeholder.
+
+Adding a module also supplies its content, checkpoint, diagnostic and final-assessment placeholders.
+
+Test is available before export validation passes. It creates a separate draft snapshot, supplying defaults for missing content and question pools. The saved author project is not modified by those draft repairs. Export still validates the actual project.
+
+Replace placeholder content and review the assessment before releasing the course. A saved draft test folder can still contain draft placeholders.
+
+## Replace a project safely
+
+After confirming either Reload Example (Statistics Starter) or Start blank, the builder first downloads the current project as a timestamped JSON, then replaces it. Cancelling the confirmation leaves the current project in place.
+
+## Folder workflow
+
+Use Test to prepare a snapshot, then Course files → Save finalised folder. Choose a parent folder; the application creates a timestamped course subfolder. Folder writing requires Chrome/Edge on localhost or HTTPS.
+
+Use Load SCORM folder to test an extracted folder whose root contains imsmanifest.xml. Files are imported as a snapshot; load the folder again after editing external files.
+
+To package a saved folder, ZIP its contents with imsmanifest.xml at the ZIP root. Only include course files, not the builder or test harness. The saved index.html remains the original LMS launcher.
+
+The test worker injects navigation controls only into the browser-local runtime response. It does not alter stored files, exported ZIPs or saved course folders.
+
+## Persistence and limits
+
+Projects, test snapshots and attempt data are stored in this browser. Keep downloaded backups; clearing site data removes browser copies.
+
+This is a single-SCO author test harness, not a full LMS or SCORM conformance validator. Perform acceptance testing in the destination LMS. External hosted media and configured xAPI services still require their connections. Only test course packages you trust, because their scripts execute on the test site's origin.
+
+The original authoring source was not supplied: the compiled UI bundle is retained, with readable supporting scripts. See TEST-RESULTS.md for checks and remaining limitations.
