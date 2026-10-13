@@ -1,13 +1,15 @@
 // Universal SCORM Player Bridge & Statistics Starter
 (function() {
-  // Clear any legacy HLTINF006 / infection sample project from localStorage
+  // Clear any legacy or outdated sample project missing elevation or essential styles from localStorage
   try {
     const keys = ["adaptive-scorm-studio-project-v2", "adaptive-scorm-studio-project-v1"];
     for (const k of keys) {
       const val = localStorage.getItem(k);
-      if (val && (val.includes("HLTINF006") || val.includes("Infection") || val.includes("infection"))) {
-        localStorage.removeItem(k);
-        console.log("Cleared legacy HLTINF006 sample content from " + k);
+      if (val) {
+        if (val.includes("HLTINF006") || val.includes("Infection") || val.includes("infection") || !val.includes('"elevation":') || !val.includes('"essential":')) {
+          localStorage.removeItem(k);
+          console.log("Cleared outdated sample content from " + k);
+        }
       }
     }
   } catch (e) {
@@ -28,12 +30,12 @@
   "challengeThreshold": 82,
   "estimatedMinutes": 75,
   "theme": {
-    "name": "Modern Royal Blue",
+    "name": "Royal Navy Statistics",
     "variant": "light",
     "background": "#f8fafc",
     "surface": "#ffffff",
     "surfaceRaised": "#ffffff",
-    "border": "#e2e8f0",
+    "border": "#cbd5e1",
     "textPrimary": "#0f172a",
     "textMuted": "#475569",
     "textOnBrand": "#ffffff",
@@ -44,60 +46,76 @@
     "accentSoft": "#e0f2fe",
     "mastered": "#15803d",
     "fragile": "#b45309",
-    "gap": "#b91c1c",
+    "gap": "#0284c7",
+    "critical": "#b91c1c",
     "neutralDark": "#0f172a",
     "neutralLight": "#f8fafc",
-    "radii": {
-      "sm": 6,
-      "md": 10,
-      "lg": 14,
-      "full": 9999
-    },
-    "radius": 12,
-    "typography": {
-      "hero": {
-        "fontSize": 32,
-        "lineHeight": 1.2,
-        "maxMeasure": 30
-      },
-      "h1": {
-        "fontSize": 26,
-        "lineHeight": 1.25,
-        "maxMeasure": 35
-      },
-      "h2": {
-        "fontSize": 20,
-        "lineHeight": 1.3,
-        "maxMeasure": 40
-      },
-      "h3": {
-        "fontSize": 17,
-        "lineHeight": 1.4,
-        "maxMeasure": 45
-      },
-      "body": {
-        "fontSize": 15,
-        "lineHeight": 1.5,
-        "maxMeasure": 60
-      },
-      "caption": {
-        "fontSize": 13,
-        "lineHeight": 1.4,
-        "maxMeasure": 50
-      },
-      "micro": {
-        "fontSize": 11,
-        "lineHeight": 1.3,
-        "maxMeasure": 40
-      }
-    },
-    "motion": {
-      "durationMs": 180,
-      "easing": "ease-out",
-      "scale": 1
-    },
+    "fontFamily": "Inter, system-ui, -apple-system, sans-serif",
     "customFontName": "",
     "customFontData": "",
+    "typography": {
+      "display": {
+        "fontSize": 64,
+        "lineHeight": 1.02,
+        "maxMeasure": 18
+      },
+      "h1": {
+        "fontSize": 46,
+        "lineHeight": 1.08,
+        "maxMeasure": 24
+      },
+      "h2": {
+        "fontSize": 32,
+        "lineHeight": 1.16,
+        "maxMeasure": 32
+      },
+      "h3": {
+        "fontSize": 22,
+        "lineHeight": 1.25,
+        "maxMeasure": 40
+      },
+      "body": {
+        "fontSize": 17,
+        "lineHeight": 1.6,
+        "maxMeasure": 68
+      },
+      "small": {
+        "fontSize": 14,
+        "lineHeight": 1.5,
+        "maxMeasure": 72
+      },
+      "caption": {
+        "fontSize": 12,
+        "lineHeight": 1.4,
+        "maxMeasure": 76
+      }
+    },
+    "spacing": {
+      "xs": 4,
+      "sm": 8,
+      "md": 16,
+      "lg": 24,
+      "xl": 32,
+      "xxl": 48
+    },
+    "radii": {
+      "sm": 8,
+      "md": 12,
+      "lg": 18,
+      "pill": 999
+    },
+    "radius": 14,
+    "elevation": {
+      "card": "0 10px 30px rgba(15,23,42,.08)",
+      "raised": "0 20px 60px rgba(15,23,42,.14)"
+    },
+    "motion": {
+      "enabled": true,
+      "durationMs": 220,
+      "easing": "cubic-bezier(.2,.8,.2,1)",
+      "scale": 1,
+      "entrance": "fadeRise"
+    },
     "customCss": ""
   },
   "coverPage": {
@@ -105,7 +123,8 @@
     "eyebrow": "STAT101 · Probability & Data Science",
     "title": "Basic to Advanced Statistics",
     "subtitle": "Master descriptive metrics, probability distributions, hypothesis testing, ANOVA, and regression modeling.",
-    "layout": "heroSplit",
+    "layout": "split",
+    "logo": [],
     "hero": [],
     "author": "Adaptive SCORM Studio",
     "organization": "Department of Statistics & Data Science",
@@ -176,10 +195,59 @@
         "advanced": "Implement robust location and dispersion estimators including the trimmed mean, Winsorized variance, and Median Absolute Deviation (MAD). Apply Box-Cox and logarithmic power transformations to stabilize variance and normalize skewed empirical data."
       },
       "contentStyles": {
-        "cardLayout": "standard",
-        "calloutStyle": "info"
+        "essential": {
+          "background": "#f8fafc",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "beginner": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#0284c7",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "intermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "upperIntermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#d97706",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "advanced": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#7c3aed",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        }
       },
-      "contentMedia": [],
+      "contentMedia": {
+        "essential": [],
+        "beginner": [],
+        "intermediate": [],
+        "upperIntermediate": [],
+        "advanced": []
+      },
       "checkpoints": {
         "beginner": {
           "id": "descriptive-beginner-checkpoint",
@@ -191,19 +259,23 @@
             "options": [
               {
                 "id": "opt-median",
-                "text": "The median, because it relies on ranking rather than magnitude and is unaffected by extreme values."
+                "text": "The median, because it relies on ranking rather than magnitude and is unaffected by extreme values.",
+                "media": []
               },
               {
                 "id": "opt-mean",
-                "text": "The arithmetic mean, because it uses all observed values in the dataset."
+                "text": "The arithmetic mean, because it uses all observed values in the dataset.",
+                "media": []
               },
               {
                 "id": "opt-midrange",
-                "text": "The midrange (mean of max and min), because it captures the entire spread."
+                "text": "The midrange (mean of max and min), because it captures the entire spread.",
+                "media": []
               },
               {
                 "id": "opt-geometric",
-                "text": "The geometric mean, because it always equals the median in positive numbers."
+                "text": "The geometric mean, because it always equals the median in positive numbers.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -221,8 +293,10 @@
             "moduleId": "descriptive-module",
             "level": "beginner",
             "topic": "Descriptive Statistics & Exploratory Analysis: Beginner",
-            "text": "Review the descriptive concept: Correct! The median divides the ordered distribution in half and is unaffected by extreme outliers in the upper tail."
-          }
+            "text": "Review the descriptive concept: Correct! The median divides the ordered distribution in half and is unaffected by extreme outliers in the upper tail.",
+            "media": []
+          },
+          "media": []
         },
         "intermediate": {
           "id": "descriptive-intermediate-checkpoint",
@@ -234,15 +308,18 @@
             "options": [
               {
                 "id": "opt-a",
-                "text": "Standard statistical formula and analytical procedure for descriptive."
+                "text": "Standard statistical formula and analytical procedure for descriptive.",
+                "media": []
               },
               {
                 "id": "opt-b",
-                "text": "Subjective visual estimation without mathematical verification."
+                "text": "Subjective visual estimation without mathematical verification.",
+                "media": []
               },
               {
                 "id": "opt-c",
-                "text": "Arbitrary selection ignoring underlying distribution characteristics."
+                "text": "Arbitrary selection ignoring underlying distribution characteristics.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -260,8 +337,10 @@
             "moduleId": "descriptive-module",
             "level": "intermediate",
             "topic": "Descriptive Statistics & Exploratory Analysis: Intermediate",
-            "text": "Review the descriptive concept: Correct! Rigorous quantitative evaluation is required for descriptive statistics & exploratory analysis."
-          }
+            "text": "Review the descriptive concept: Correct! Rigorous quantitative evaluation is required for descriptive statistics & exploratory analysis.",
+            "media": []
+          },
+          "media": []
         },
         "upperIntermediate": {
           "id": "descriptive-upperIntermediate-checkpoint",
@@ -273,15 +352,18 @@
             "options": [
               {
                 "id": "opt-valid",
-                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions."
+                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions.",
+                "media": []
               },
               {
                 "id": "opt-ignore",
-                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically."
+                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically.",
+                "media": []
               },
               {
                 "id": "opt-random",
-                "text": "Ignoring sample independence and measurement reliability."
+                "text": "Ignoring sample independence and measurement reliability.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -299,8 +381,10 @@
             "moduleId": "descriptive-module",
             "level": "upperIntermediate",
             "topic": "Descriptive Statistics & Exploratory Analysis: UpperIntermediate",
-            "text": "Review the descriptive concept: Correct! Testing statistical assumptions is essential before drawing valid inferences."
-          }
+            "text": "Review the descriptive concept: Correct! Testing statistical assumptions is essential before drawing valid inferences.",
+            "media": []
+          },
+          "media": []
         },
         "advanced": {
           "id": "descriptive-advanced-checkpoint",
@@ -312,15 +396,18 @@
             "options": [
               {
                 "id": "opt-robust",
-                "text": "Employ robust estimators, power transformations, or non-parametric alternatives."
+                "text": "Employ robust estimators, power transformations, or non-parametric alternatives.",
+                "media": []
               },
               {
                 "id": "opt-proceed",
-                "text": "Proceed without modifications because large sample sizes eliminate all biases."
+                "text": "Proceed without modifications because large sample sizes eliminate all biases.",
+                "media": []
               },
               {
                 "id": "opt-discard",
-                "text": "Discard random observations until the test statistic reaches significance."
+                "text": "Discard random observations until the test statistic reaches significance.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -338,8 +425,10 @@
             "moduleId": "descriptive-module",
             "level": "advanced",
             "topic": "Descriptive Statistics & Exploratory Analysis: Advanced",
-            "text": "Review the descriptive concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions."
-          }
+            "text": "Review the descriptive concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions.",
+            "media": []
+          },
+          "media": []
         }
       },
       "fastTrack": true
@@ -360,10 +449,59 @@
         "advanced": "Derive properties of Probability Density Functions (PDF) and Cumulative Distribution Functions (CDF). Evaluate sampling distribution convergence via the Berry-Esseen theorem and assess normality using quantile-quantile (Q-Q) plots and the Shapiro-Wilk test."
       },
       "contentStyles": {
-        "cardLayout": "standard",
-        "calloutStyle": "info"
+        "essential": {
+          "background": "#f8fafc",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "beginner": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#0284c7",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "intermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "upperIntermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#d97706",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "advanced": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#7c3aed",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        }
       },
-      "contentMedia": [],
+      "contentMedia": {
+        "essential": [],
+        "beginner": [],
+        "intermediate": [],
+        "upperIntermediate": [],
+        "advanced": []
+      },
       "checkpoints": {
         "beginner": {
           "id": "probability-beginner-checkpoint",
@@ -375,19 +513,23 @@
             "options": [
               {
                 "id": "opt-half",
-                "text": "The standard error is halved (divided by 2), since SE = sigma / sqrt(n)."
+                "text": "The standard error is halved (divided by 2), since SE = sigma / sqrt(n).",
+                "media": []
               },
               {
                 "id": "opt-quarter",
-                "text": "The standard error is divided by 4, scaling inversely with sample size."
+                "text": "The standard error is divided by 4, scaling inversely with sample size.",
+                "media": []
               },
               {
                 "id": "opt-double",
-                "text": "The standard error doubles due to increased sample variability."
+                "text": "The standard error doubles due to increased sample variability.",
+                "media": []
               },
               {
                 "id": "opt-constant",
-                "text": "The standard error remains constant because population sigma does not change."
+                "text": "The standard error remains constant because population sigma does not change.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -405,8 +547,10 @@
             "moduleId": "probability-module",
             "level": "beginner",
             "topic": "Probability Theory & Sampling Distributions: Beginner",
-            "text": "Review the probability concept: Correct! Because n is inside the square root in the denominator (SE = sigma / sqrt(n)), multiplying n by 4 cuts the standard error in half."
-          }
+            "text": "Review the probability concept: Correct! Because n is inside the square root in the denominator (SE = sigma / sqrt(n)), multiplying n by 4 cuts the standard error in half.",
+            "media": []
+          },
+          "media": []
         },
         "intermediate": {
           "id": "probability-intermediate-checkpoint",
@@ -418,15 +562,18 @@
             "options": [
               {
                 "id": "opt-a",
-                "text": "Standard statistical formula and analytical procedure for probability."
+                "text": "Standard statistical formula and analytical procedure for probability.",
+                "media": []
               },
               {
                 "id": "opt-b",
-                "text": "Subjective visual estimation without mathematical verification."
+                "text": "Subjective visual estimation without mathematical verification.",
+                "media": []
               },
               {
                 "id": "opt-c",
-                "text": "Arbitrary selection ignoring underlying distribution characteristics."
+                "text": "Arbitrary selection ignoring underlying distribution characteristics.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -444,8 +591,10 @@
             "moduleId": "probability-module",
             "level": "intermediate",
             "topic": "Probability Theory & Sampling Distributions: Intermediate",
-            "text": "Review the probability concept: Correct! Rigorous quantitative evaluation is required for probability theory & sampling distributions."
-          }
+            "text": "Review the probability concept: Correct! Rigorous quantitative evaluation is required for probability theory & sampling distributions.",
+            "media": []
+          },
+          "media": []
         },
         "upperIntermediate": {
           "id": "probability-upperIntermediate-checkpoint",
@@ -457,15 +606,18 @@
             "options": [
               {
                 "id": "opt-valid",
-                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions."
+                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions.",
+                "media": []
               },
               {
                 "id": "opt-ignore",
-                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically."
+                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically.",
+                "media": []
               },
               {
                 "id": "opt-random",
-                "text": "Ignoring sample independence and measurement reliability."
+                "text": "Ignoring sample independence and measurement reliability.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -483,8 +635,10 @@
             "moduleId": "probability-module",
             "level": "upperIntermediate",
             "topic": "Probability Theory & Sampling Distributions: UpperIntermediate",
-            "text": "Review the probability concept: Correct! Testing statistical assumptions is essential before drawing valid inferences."
-          }
+            "text": "Review the probability concept: Correct! Testing statistical assumptions is essential before drawing valid inferences.",
+            "media": []
+          },
+          "media": []
         },
         "advanced": {
           "id": "probability-advanced-checkpoint",
@@ -496,15 +650,18 @@
             "options": [
               {
                 "id": "opt-robust",
-                "text": "Employ robust estimators, power transformations, or non-parametric alternatives."
+                "text": "Employ robust estimators, power transformations, or non-parametric alternatives.",
+                "media": []
               },
               {
                 "id": "opt-proceed",
-                "text": "Proceed without modifications because large sample sizes eliminate all biases."
+                "text": "Proceed without modifications because large sample sizes eliminate all biases.",
+                "media": []
               },
               {
                 "id": "opt-discard",
-                "text": "Discard random observations until the test statistic reaches significance."
+                "text": "Discard random observations until the test statistic reaches significance.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -522,8 +679,10 @@
             "moduleId": "probability-module",
             "level": "advanced",
             "topic": "Probability Theory & Sampling Distributions: Advanced",
-            "text": "Review the probability concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions."
-          }
+            "text": "Review the probability concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions.",
+            "media": []
+          },
+          "media": []
         }
       },
       "fastTrack": true
@@ -544,10 +703,59 @@
         "advanced": "Address the multiple testing problem by implementing Bonferroni correction and the Benjamini-Hochberg False Discovery Rate (FDR). Employ non-parametric alternatives (Mann-Whitney U, Wilcoxon Signed-Rank) when distributional assumptions fail."
       },
       "contentStyles": {
-        "cardLayout": "standard",
-        "calloutStyle": "info"
+        "essential": {
+          "background": "#f8fafc",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "beginner": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#0284c7",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "intermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "upperIntermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#d97706",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "advanced": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#7c3aed",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        }
       },
-      "contentMedia": [],
+      "contentMedia": {
+        "essential": [],
+        "beginner": [],
+        "intermediate": [],
+        "upperIntermediate": [],
+        "advanced": []
+      },
       "checkpoints": {
         "beginner": {
           "id": "inferential-beginner-checkpoint",
@@ -559,19 +767,23 @@
             "options": [
               {
                 "id": "opt-reject",
-                "text": "Reject the null hypothesis; there is statistically significant evidence of a treatment effect at the 0.05 level."
+                "text": "Reject the null hypothesis; there is statistically significant evidence of a treatment effect at the 0.05 level.",
+                "media": []
               },
               {
                 "id": "opt-fail",
-                "text": "Fail to reject the null hypothesis, because p is greater than 0.01."
+                "text": "Fail to reject the null hypothesis, because p is greater than 0.01.",
+                "media": []
               },
               {
                 "id": "opt-prove-alt",
-                "text": "Accept that the alternative hypothesis has been proven with 100% certainty."
+                "text": "Accept that the alternative hypothesis has been proven with 100% certainty.",
+                "media": []
               },
               {
                 "id": "opt-type1",
-                "text": "Conclude that a Type I error has definitely occurred."
+                "text": "Conclude that a Type I error has definitely occurred.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -589,8 +801,10 @@
             "moduleId": "inferential-module",
             "level": "beginner",
             "topic": "Hypothesis Testing & Two-Sample Inference: Beginner",
-            "text": "Review the inferential concept: Correct! Because p = 0.018 <= 0.05, we reject the null hypothesis and conclude that the observed effect is statistically significant."
-          }
+            "text": "Review the inferential concept: Correct! Because p = 0.018 <= 0.05, we reject the null hypothesis and conclude that the observed effect is statistically significant.",
+            "media": []
+          },
+          "media": []
         },
         "intermediate": {
           "id": "inferential-intermediate-checkpoint",
@@ -602,15 +816,18 @@
             "options": [
               {
                 "id": "opt-a",
-                "text": "Standard statistical formula and analytical procedure for inferential."
+                "text": "Standard statistical formula and analytical procedure for inferential.",
+                "media": []
               },
               {
                 "id": "opt-b",
-                "text": "Subjective visual estimation without mathematical verification."
+                "text": "Subjective visual estimation without mathematical verification.",
+                "media": []
               },
               {
                 "id": "opt-c",
-                "text": "Arbitrary selection ignoring underlying distribution characteristics."
+                "text": "Arbitrary selection ignoring underlying distribution characteristics.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -628,8 +845,10 @@
             "moduleId": "inferential-module",
             "level": "intermediate",
             "topic": "Hypothesis Testing & Two-Sample Inference: Intermediate",
-            "text": "Review the inferential concept: Correct! Rigorous quantitative evaluation is required for hypothesis testing & two-sample inference."
-          }
+            "text": "Review the inferential concept: Correct! Rigorous quantitative evaluation is required for hypothesis testing & two-sample inference.",
+            "media": []
+          },
+          "media": []
         },
         "upperIntermediate": {
           "id": "inferential-upperIntermediate-checkpoint",
@@ -641,15 +860,18 @@
             "options": [
               {
                 "id": "opt-valid",
-                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions."
+                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions.",
+                "media": []
               },
               {
                 "id": "opt-ignore",
-                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically."
+                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically.",
+                "media": []
               },
               {
                 "id": "opt-random",
-                "text": "Ignoring sample independence and measurement reliability."
+                "text": "Ignoring sample independence and measurement reliability.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -667,8 +889,10 @@
             "moduleId": "inferential-module",
             "level": "upperIntermediate",
             "topic": "Hypothesis Testing & Two-Sample Inference: UpperIntermediate",
-            "text": "Review the inferential concept: Correct! Testing statistical assumptions is essential before drawing valid inferences."
-          }
+            "text": "Review the inferential concept: Correct! Testing statistical assumptions is essential before drawing valid inferences.",
+            "media": []
+          },
+          "media": []
         },
         "advanced": {
           "id": "inferential-advanced-checkpoint",
@@ -680,15 +904,18 @@
             "options": [
               {
                 "id": "opt-robust",
-                "text": "Employ robust estimators, power transformations, or non-parametric alternatives."
+                "text": "Employ robust estimators, power transformations, or non-parametric alternatives.",
+                "media": []
               },
               {
                 "id": "opt-proceed",
-                "text": "Proceed without modifications because large sample sizes eliminate all biases."
+                "text": "Proceed without modifications because large sample sizes eliminate all biases.",
+                "media": []
               },
               {
                 "id": "opt-discard",
-                "text": "Discard random observations until the test statistic reaches significance."
+                "text": "Discard random observations until the test statistic reaches significance.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -706,8 +933,10 @@
             "moduleId": "inferential-module",
             "level": "advanced",
             "topic": "Hypothesis Testing & Two-Sample Inference: Advanced",
-            "text": "Review the inferential concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions."
-          }
+            "text": "Review the inferential concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions.",
+            "media": []
+          },
+          "media": []
         }
       },
       "fastTrack": true
@@ -728,10 +957,59 @@
         "advanced": "Apply Fisher's Exact Test for 2x2 tables with sparse counts. Calculate Cramer's V to measure the strength of association, and formulate log-linear models for multi-way contingency structures."
       },
       "contentStyles": {
-        "cardLayout": "standard",
-        "calloutStyle": "info"
+        "essential": {
+          "background": "#f8fafc",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "beginner": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#0284c7",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "intermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "upperIntermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#d97706",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "advanced": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#7c3aed",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        }
       },
-      "contentMedia": [],
+      "contentMedia": {
+        "essential": [],
+        "beginner": [],
+        "intermediate": [],
+        "upperIntermediate": [],
+        "advanced": []
+      },
       "checkpoints": {
         "beginner": {
           "id": "categorical-beginner-checkpoint",
@@ -743,19 +1021,23 @@
             "options": [
               {
                 "id": "opt-6",
-                "text": "6, calculated as (3 - 1) * (4 - 1) = 2 * 3 = 6."
+                "text": "6, calculated as (3 - 1) * (4 - 1) = 2 * 3 = 6.",
+                "media": []
               },
               {
                 "id": "opt-12",
-                "text": "12, calculated as the total number of cells 3 * 4 = 12."
+                "text": "12, calculated as the total number of cells 3 * 4 = 12.",
+                "media": []
               },
               {
                 "id": "opt-11",
-                "text": "11, calculated as total cells minus one (12 - 1 = 11)."
+                "text": "11, calculated as total cells minus one (12 - 1 = 11).",
+                "media": []
               },
               {
                 "id": "opt-7",
-                "text": "7, calculated as rows plus columns (3 + 4 = 7)."
+                "text": "7, calculated as rows plus columns (3 + 4 = 7).",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -773,8 +1055,10 @@
             "moduleId": "categorical-module",
             "level": "beginner",
             "topic": "Categorical Data Analysis & Contingency Testing: Beginner",
-            "text": "Review the categorical concept: Correct! The degrees of freedom for an r x c contingency table are (r - 1) * (c - 1) = (3 - 1) * (4 - 1) = 6."
-          }
+            "text": "Review the categorical concept: Correct! The degrees of freedom for an r x c contingency table are (r - 1) * (c - 1) = (3 - 1) * (4 - 1) = 6.",
+            "media": []
+          },
+          "media": []
         },
         "intermediate": {
           "id": "categorical-intermediate-checkpoint",
@@ -786,15 +1070,18 @@
             "options": [
               {
                 "id": "opt-a",
-                "text": "Standard statistical formula and analytical procedure for categorical."
+                "text": "Standard statistical formula and analytical procedure for categorical.",
+                "media": []
               },
               {
                 "id": "opt-b",
-                "text": "Subjective visual estimation without mathematical verification."
+                "text": "Subjective visual estimation without mathematical verification.",
+                "media": []
               },
               {
                 "id": "opt-c",
-                "text": "Arbitrary selection ignoring underlying distribution characteristics."
+                "text": "Arbitrary selection ignoring underlying distribution characteristics.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -812,8 +1099,10 @@
             "moduleId": "categorical-module",
             "level": "intermediate",
             "topic": "Categorical Data Analysis & Contingency Testing: Intermediate",
-            "text": "Review the categorical concept: Correct! Rigorous quantitative evaluation is required for categorical data analysis & contingency testing."
-          }
+            "text": "Review the categorical concept: Correct! Rigorous quantitative evaluation is required for categorical data analysis & contingency testing.",
+            "media": []
+          },
+          "media": []
         },
         "upperIntermediate": {
           "id": "categorical-upperIntermediate-checkpoint",
@@ -825,15 +1114,18 @@
             "options": [
               {
                 "id": "opt-valid",
-                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions."
+                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions.",
+                "media": []
               },
               {
                 "id": "opt-ignore",
-                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically."
+                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically.",
+                "media": []
               },
               {
                 "id": "opt-random",
-                "text": "Ignoring sample independence and measurement reliability."
+                "text": "Ignoring sample independence and measurement reliability.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -851,8 +1143,10 @@
             "moduleId": "categorical-module",
             "level": "upperIntermediate",
             "topic": "Categorical Data Analysis & Contingency Testing: UpperIntermediate",
-            "text": "Review the categorical concept: Correct! Testing statistical assumptions is essential before drawing valid inferences."
-          }
+            "text": "Review the categorical concept: Correct! Testing statistical assumptions is essential before drawing valid inferences.",
+            "media": []
+          },
+          "media": []
         },
         "advanced": {
           "id": "categorical-advanced-checkpoint",
@@ -864,15 +1158,18 @@
             "options": [
               {
                 "id": "opt-robust",
-                "text": "Employ robust estimators, power transformations, or non-parametric alternatives."
+                "text": "Employ robust estimators, power transformations, or non-parametric alternatives.",
+                "media": []
               },
               {
                 "id": "opt-proceed",
-                "text": "Proceed without modifications because large sample sizes eliminate all biases."
+                "text": "Proceed without modifications because large sample sizes eliminate all biases.",
+                "media": []
               },
               {
                 "id": "opt-discard",
-                "text": "Discard random observations until the test statistic reaches significance."
+                "text": "Discard random observations until the test statistic reaches significance.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -890,8 +1187,10 @@
             "moduleId": "categorical-module",
             "level": "advanced",
             "topic": "Categorical Data Analysis & Contingency Testing: Advanced",
-            "text": "Review the categorical concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions."
-          }
+            "text": "Review the categorical concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions.",
+            "media": []
+          },
+          "media": []
         }
       },
       "fastTrack": true
@@ -912,10 +1211,59 @@
         "advanced": "Formulate Two-Way Factorial ANOVA with interaction effects (Factor A, Factor B, A x B interaction). Interpret parallel vs intersecting profile plots, and apply Repeated Measures ANOVA with Mauchly's test for sphericity."
       },
       "contentStyles": {
-        "cardLayout": "standard",
-        "calloutStyle": "info"
+        "essential": {
+          "background": "#f8fafc",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "beginner": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#0284c7",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "intermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "upperIntermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#d97706",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "advanced": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#7c3aed",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        }
       },
-      "contentMedia": [],
+      "contentMedia": {
+        "essential": [],
+        "beginner": [],
+        "intermediate": [],
+        "upperIntermediate": [],
+        "advanced": []
+      },
       "checkpoints": {
         "beginner": {
           "id": "variance-beginner-checkpoint",
@@ -927,19 +1275,23 @@
             "options": [
               {
                 "id": "opt-familywise",
-                "text": "Multiple t-tests inflate the family-wise Type I error rate to approximately 14%, increasing the chance of false positives."
+                "text": "Multiple t-tests inflate the family-wise Type I error rate to approximately 14%, increasing the chance of false positives.",
+                "media": []
               },
               {
                 "id": "opt-variance",
-                "text": "T-tests cannot be computed when samples have more than 20 participants."
+                "text": "T-tests cannot be computed when samples have more than 20 participants.",
+                "media": []
               },
               {
                 "id": "opt-negative",
-                "text": "T-tests always produce negative values when comparing three groups."
+                "text": "T-tests always produce negative values when comparing three groups.",
+                "media": []
               },
               {
                 "id": "opt-degrees",
-                "text": "ANOVA eliminates the need for any post-hoc pairwise comparisons."
+                "text": "ANOVA eliminates the need for any post-hoc pairwise comparisons.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -957,8 +1309,10 @@
             "moduleId": "variance-module",
             "level": "beginner",
             "topic": "Analysis of Variance (ANOVA) & Experimental Design: Beginner",
-            "text": "Review the variance concept: Correct! With 3 tests at alpha = 0.05, the cumulative family-wise error rate is 1 - (1 - 0.05)^3 = 14.3%. ANOVA protects against this inflation."
-          }
+            "text": "Review the variance concept: Correct! With 3 tests at alpha = 0.05, the cumulative family-wise error rate is 1 - (1 - 0.05)^3 = 14.3%. ANOVA protects against this inflation.",
+            "media": []
+          },
+          "media": []
         },
         "intermediate": {
           "id": "variance-intermediate-checkpoint",
@@ -970,15 +1324,18 @@
             "options": [
               {
                 "id": "opt-a",
-                "text": "Standard statistical formula and analytical procedure for variance."
+                "text": "Standard statistical formula and analytical procedure for variance.",
+                "media": []
               },
               {
                 "id": "opt-b",
-                "text": "Subjective visual estimation without mathematical verification."
+                "text": "Subjective visual estimation without mathematical verification.",
+                "media": []
               },
               {
                 "id": "opt-c",
-                "text": "Arbitrary selection ignoring underlying distribution characteristics."
+                "text": "Arbitrary selection ignoring underlying distribution characteristics.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -996,8 +1353,10 @@
             "moduleId": "variance-module",
             "level": "intermediate",
             "topic": "Analysis of Variance (ANOVA) & Experimental Design: Intermediate",
-            "text": "Review the variance concept: Correct! Rigorous quantitative evaluation is required for analysis of variance (anova) & experimental design."
-          }
+            "text": "Review the variance concept: Correct! Rigorous quantitative evaluation is required for analysis of variance (anova) & experimental design.",
+            "media": []
+          },
+          "media": []
         },
         "upperIntermediate": {
           "id": "variance-upperIntermediate-checkpoint",
@@ -1009,15 +1368,18 @@
             "options": [
               {
                 "id": "opt-valid",
-                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions."
+                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions.",
+                "media": []
               },
               {
                 "id": "opt-ignore",
-                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically."
+                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically.",
+                "media": []
               },
               {
                 "id": "opt-random",
-                "text": "Ignoring sample independence and measurement reliability."
+                "text": "Ignoring sample independence and measurement reliability.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -1035,8 +1397,10 @@
             "moduleId": "variance-module",
             "level": "upperIntermediate",
             "topic": "Analysis of Variance (ANOVA) & Experimental Design: UpperIntermediate",
-            "text": "Review the variance concept: Correct! Testing statistical assumptions is essential before drawing valid inferences."
-          }
+            "text": "Review the variance concept: Correct! Testing statistical assumptions is essential before drawing valid inferences.",
+            "media": []
+          },
+          "media": []
         },
         "advanced": {
           "id": "variance-advanced-checkpoint",
@@ -1048,15 +1412,18 @@
             "options": [
               {
                 "id": "opt-robust",
-                "text": "Employ robust estimators, power transformations, or non-parametric alternatives."
+                "text": "Employ robust estimators, power transformations, or non-parametric alternatives.",
+                "media": []
               },
               {
                 "id": "opt-proceed",
-                "text": "Proceed without modifications because large sample sizes eliminate all biases."
+                "text": "Proceed without modifications because large sample sizes eliminate all biases.",
+                "media": []
               },
               {
                 "id": "opt-discard",
-                "text": "Discard random observations until the test statistic reaches significance."
+                "text": "Discard random observations until the test statistic reaches significance.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -1074,8 +1441,10 @@
             "moduleId": "variance-module",
             "level": "advanced",
             "topic": "Analysis of Variance (ANOVA) & Experimental Design: Advanced",
-            "text": "Review the variance concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions."
-          }
+            "text": "Review the variance concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions.",
+            "media": []
+          },
+          "media": []
         }
       },
       "fastTrack": true
@@ -1096,10 +1465,59 @@
         "advanced": "Verify OLS assumptions using residual plots: Linearity, Normality (Q-Q plot), Homoscedasticity vs Heteroscedasticity (Breusch-Pagan test), and Independence. Detect multicollinearity using Variance Inflation Factors (VIF > 5-10) and influential outliers using Cook's Distance."
       },
       "contentStyles": {
-        "cardLayout": "standard",
-        "calloutStyle": "info"
+        "essential": {
+          "background": "#f8fafc",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "beginner": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#0284c7",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "intermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#1d4ed8",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "upperIntermediate": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#d97706",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        },
+        "advanced": {
+          "background": "#ffffff",
+          "color": "#0f172a",
+          "accent": "#7c3aed",
+          "fontSize": 17,
+          "textAlign": "left",
+          "padding": 24,
+          "borderRadius": 14
+        }
       },
-      "contentMedia": [],
+      "contentMedia": {
+        "essential": [],
+        "beginner": [],
+        "intermediate": [],
+        "upperIntermediate": [],
+        "advanced": []
+      },
       "checkpoints": {
         "beginner": {
           "id": "regression-beginner-checkpoint",
@@ -1111,19 +1529,23 @@
             "options": [
               {
                 "id": "opt-r2",
-                "text": "72% of the total variance in sales is explained by the combination of ad spend and store size in the model."
+                "text": "72% of the total variance in sales is explained by the combination of ad spend and store size in the model.",
+                "media": []
               },
               {
                 "id": "opt-correlation",
-                "text": "The Pearson correlation coefficient between sales and each predictor is 0.72."
+                "text": "The Pearson correlation coefficient between sales and each predictor is 0.72.",
+                "media": []
               },
               {
                 "id": "opt-error",
-                "text": "The model will make accurate sales predictions exactly 72% of the time."
+                "text": "The model will make accurate sales predictions exactly 72% of the time.",
+                "media": []
               },
               {
                 "id": "opt-slope",
-                "text": "Every dollar increase in ad spend increases sales by $0.72."
+                "text": "Every dollar increase in ad spend increases sales by $0.72.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -1141,8 +1563,10 @@
             "moduleId": "regression-module",
             "level": "beginner",
             "topic": "Correlation, Linear Regression & Predictive Modeling: Beginner",
-            "text": "Review the regression concept: Correct! R^2 (coefficient of determination) represents the proportion of variance in the dependent variable explained by the independent variables."
-          }
+            "text": "Review the regression concept: Correct! R^2 (coefficient of determination) represents the proportion of variance in the dependent variable explained by the independent variables.",
+            "media": []
+          },
+          "media": []
         },
         "intermediate": {
           "id": "regression-intermediate-checkpoint",
@@ -1154,15 +1578,18 @@
             "options": [
               {
                 "id": "opt-a",
-                "text": "Standard statistical formula and analytical procedure for regression."
+                "text": "Standard statistical formula and analytical procedure for regression.",
+                "media": []
               },
               {
                 "id": "opt-b",
-                "text": "Subjective visual estimation without mathematical verification."
+                "text": "Subjective visual estimation without mathematical verification.",
+                "media": []
               },
               {
                 "id": "opt-c",
-                "text": "Arbitrary selection ignoring underlying distribution characteristics."
+                "text": "Arbitrary selection ignoring underlying distribution characteristics.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -1180,8 +1607,10 @@
             "moduleId": "regression-module",
             "level": "intermediate",
             "topic": "Correlation, Linear Regression & Predictive Modeling: Intermediate",
-            "text": "Review the regression concept: Correct! Rigorous quantitative evaluation is required for correlation, linear regression & predictive modeling."
-          }
+            "text": "Review the regression concept: Correct! Rigorous quantitative evaluation is required for correlation, linear regression & predictive modeling.",
+            "media": []
+          },
+          "media": []
         },
         "upperIntermediate": {
           "id": "regression-upperIntermediate-checkpoint",
@@ -1193,15 +1622,18 @@
             "options": [
               {
                 "id": "opt-valid",
-                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions."
+                "text": "Verifying distribution assumptions, sample size criteria, and boundary conditions.",
+                "media": []
               },
               {
                 "id": "opt-ignore",
-                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically."
+                "text": "Assuming all empirical datasets satisfy normal distribution criteria automatically.",
+                "media": []
               },
               {
                 "id": "opt-random",
-                "text": "Ignoring sample independence and measurement reliability."
+                "text": "Ignoring sample independence and measurement reliability.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -1219,8 +1651,10 @@
             "moduleId": "regression-module",
             "level": "upperIntermediate",
             "topic": "Correlation, Linear Regression & Predictive Modeling: UpperIntermediate",
-            "text": "Review the regression concept: Correct! Testing statistical assumptions is essential before drawing valid inferences."
-          }
+            "text": "Review the regression concept: Correct! Testing statistical assumptions is essential before drawing valid inferences.",
+            "media": []
+          },
+          "media": []
         },
         "advanced": {
           "id": "regression-advanced-checkpoint",
@@ -1232,15 +1666,18 @@
             "options": [
               {
                 "id": "opt-robust",
-                "text": "Employ robust estimators, power transformations, or non-parametric alternatives."
+                "text": "Employ robust estimators, power transformations, or non-parametric alternatives.",
+                "media": []
               },
               {
                 "id": "opt-proceed",
-                "text": "Proceed without modifications because large sample sizes eliminate all biases."
+                "text": "Proceed without modifications because large sample sizes eliminate all biases.",
+                "media": []
               },
               {
                 "id": "opt-discard",
-                "text": "Discard random observations until the test statistic reaches significance."
+                "text": "Discard random observations until the test statistic reaches significance.",
+                "media": []
               }
             ],
             "correctOptionIds": [
@@ -1258,8 +1695,10 @@
             "moduleId": "regression-module",
             "level": "advanced",
             "topic": "Correlation, Linear Regression & Predictive Modeling: Advanced",
-            "text": "Review the regression concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions."
-          }
+            "text": "Review the regression concept: Correct! Applying robust methods or non-parametric tests ensures sound conclusions.",
+            "media": []
+          },
+          "media": []
         }
       },
       "fastTrack": true
@@ -1276,19 +1715,23 @@
         "options": [
           {
             "id": "d1-pos",
-            "text": "The distribution is right-skewed (positively skewed) with a long upper tail."
+            "text": "The distribution is right-skewed (positively skewed) with a long upper tail.",
+            "media": []
           },
           {
             "id": "d1-neg",
-            "text": "The distribution is left-skewed (negatively skewed) with extreme low values."
+            "text": "The distribution is left-skewed (negatively skewed) with extreme low values.",
+            "media": []
           },
           {
             "id": "d1-sym",
-            "text": "The distribution is symmetric and follows a perfect normal curve."
+            "text": "The distribution is symmetric and follows a perfect normal curve.",
+            "media": []
           },
           {
             "id": "d1-uni",
-            "text": "The distribution has zero variance."
+            "text": "The distribution has zero variance.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1306,8 +1749,10 @@
         "moduleId": "descriptive-module",
         "level": "beginner",
         "topic": "Descriptive Analysis: Beginner",
-        "text": "Review the descriptive concept: Correct! When mean > median, extreme large values pull the mean upward into the right tail."
-      }
+        "text": "Review the descriptive concept: Correct! When mean > median, extreme large values pull the mean upward into the right tail.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-desc-2",
@@ -1319,19 +1764,23 @@
         "options": [
           {
             "id": "d2-iqr",
-            "text": "1.5 times the Interquartile Range (IQR) above Q3 or below Q1."
+            "text": "1.5 times the Interquartile Range (IQR) above Q3 or below Q1.",
+            "media": []
           },
           {
             "id": "d2-sd",
-            "text": "Exactly 1 standard deviation from the median."
+            "text": "Exactly 1 standard deviation from the median.",
+            "media": []
           },
           {
             "id": "d2-range",
-            "text": "50% of the total range from the center."
+            "text": "50% of the total range from the center.",
+            "media": []
           },
           {
             "id": "d2-mean",
-            "text": "Any value outside the middle 90% percentile."
+            "text": "Any value outside the middle 90% percentile.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1349,8 +1798,10 @@
         "moduleId": "descriptive-module",
         "level": "intermediate",
         "topic": "Descriptive Analysis: Intermediate",
-        "text": "Review the descriptive concept: Correct! Tukey's fence rule defines outliers as values outside [Q1 - 1.5*IQR, Q3 + 1.5*IQR]."
-      }
+        "text": "Review the descriptive concept: Correct! Tukey's fence rule defines outliers as values outside [Q1 - 1.5*IQR, Q3 + 1.5*IQR].",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-prob-1",
@@ -1362,19 +1813,23 @@
         "options": [
           {
             "id": "dp1-one",
-            "text": "Exactly 1.0 (or 100%)."
+            "text": "Exactly 1.0 (or 100%).",
+            "media": []
           },
           {
             "id": "dp1-zero",
-            "text": "0.0, because single point probabilities are zero."
+            "text": "0.0, because single point probabilities are zero.",
+            "media": []
           },
           {
             "id": "dp1-inf",
-            "text": "Infinity, because continuous variables are unbounded."
+            "text": "Infinity, because continuous variables are unbounded.",
+            "media": []
           },
           {
             "id": "dp1-z",
-            "text": "Equal to the population mean mu."
+            "text": "Equal to the population mean mu.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1392,8 +1847,10 @@
         "moduleId": "probability-module",
         "level": "beginner",
         "topic": "Probability Theory: Beginner",
-        "text": "Review the probability concept: Correct! The total area under any probability density function must integrate to exactly 1."
-      }
+        "text": "Review the probability concept: Correct! The total area under any probability density function must integrate to exactly 1.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-prob-2",
@@ -1405,19 +1862,23 @@
         "options": [
           {
             "id": "dp2-poisson",
-            "text": "Poisson distribution, which models counts of events occurring in fixed time intervals."
+            "text": "Poisson distribution, which models counts of events occurring in fixed time intervals.",
+            "media": []
           },
           {
             "id": "dp2-uniform",
-            "text": "Uniform distribution, where all counts have identical probability."
+            "text": "Uniform distribution, where all counts have identical probability.",
+            "media": []
           },
           {
             "id": "dp2-t",
-            "text": "Student's t-distribution with infinite degrees of freedom."
+            "text": "Student's t-distribution with infinite degrees of freedom.",
+            "media": []
           },
           {
             "id": "dp2-bernoulli",
-            "text": "Bernoulli distribution, which only allows binary 0 or 1 values."
+            "text": "Bernoulli distribution, which only allows binary 0 or 1 values.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1435,8 +1896,10 @@
         "moduleId": "probability-module",
         "level": "intermediate",
         "topic": "Probability Theory: Intermediate",
-        "text": "Review the probability concept: Correct! The Poisson distribution models independent event arrival counts over a continuous interval."
-      }
+        "text": "Review the probability concept: Correct! The Poisson distribution models independent event arrival counts over a continuous interval.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-inf-1",
@@ -1448,19 +1911,23 @@
         "options": [
           {
             "id": "di1-falsepos",
-            "text": "Rejecting the null hypothesis when the null hypothesis is actually true (False Positive)."
+            "text": "Rejecting the null hypothesis when the null hypothesis is actually true (False Positive).",
+            "media": []
           },
           {
             "id": "di1-falseneg",
-            "text": "Failing to reject the null hypothesis when the null hypothesis is false (False Negative)."
+            "text": "Failing to reject the null hypothesis when the null hypothesis is false (False Negative).",
+            "media": []
           },
           {
             "id": "di1-calc",
-            "text": "Making a mathematical arithmetic mistake during test calculation."
+            "text": "Making a mathematical arithmetic mistake during test calculation.",
+            "media": []
           },
           {
             "id": "di1-power",
-            "text": "Having insufficient sample size to detect a genuine effect."
+            "text": "Having insufficient sample size to detect a genuine effect.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1478,8 +1945,10 @@
         "moduleId": "inferential-module",
         "level": "beginner",
         "topic": "Hypothesis Testing: Beginner",
-        "text": "Review the inferential concept: Correct! Type I error (alpha) occurs when we falsely reject a true null hypothesis."
-      }
+        "text": "Review the inferential concept: Correct! Type I error (alpha) occurs when we falsely reject a true null hypothesis.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-inf-2",
@@ -1491,19 +1960,23 @@
         "options": [
           {
             "id": "di2-paired",
-            "text": "Paired samples t-test (dependent samples t-test)."
+            "text": "Paired samples t-test (dependent samples t-test).",
+            "media": []
           },
           {
             "id": "di2-indep",
-            "text": "Independent two-sample t-test."
+            "text": "Independent two-sample t-test.",
+            "media": []
           },
           {
             "id": "di2-anova",
-            "text": "Three-way factorial ANOVA."
+            "text": "Three-way factorial ANOVA.",
+            "media": []
           },
           {
             "id": "di2-chisq",
-            "text": "Chi-Square test of independence."
+            "text": "Chi-Square test of independence.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1521,8 +1994,10 @@
         "moduleId": "inferential-module",
         "level": "intermediate",
         "topic": "Hypothesis Testing: Intermediate",
-        "text": "Review the inferential concept: Correct! Because each student provides both a pre-test and post-test score, a paired t-test is required."
-      }
+        "text": "Review the inferential concept: Correct! Because each student provides both a pre-test and post-test score, a paired t-test is required.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-cat-1",
@@ -1534,19 +2009,23 @@
         "options": [
           {
             "id": "dc1-chi",
-            "text": "Chi-Square test of independence."
+            "text": "Chi-Square test of independence.",
+            "media": []
           },
           {
             "id": "dc1-z",
-            "text": "One-sample Z-test for means."
+            "text": "One-sample Z-test for means.",
+            "media": []
           },
           {
             "id": "dc1-pearson",
-            "text": "Pearson correlation coefficient r."
+            "text": "Pearson correlation coefficient r.",
+            "media": []
           },
           {
             "id": "dc1-anova",
-            "text": "One-way ANOVA."
+            "text": "One-way ANOVA.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1564,8 +2043,10 @@
         "moduleId": "categorical-module",
         "level": "beginner",
         "topic": "Categorical Analysis: Beginner",
-        "text": "Review the categorical concept: Correct! The Chi-Square test of independence assesses association between two categorical variables."
-      }
+        "text": "Review the categorical concept: Correct! The Chi-Square test of independence assesses association between two categorical variables.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-cat-2",
@@ -1577,19 +2058,23 @@
         "options": [
           {
             "id": "dc2-noassoc",
-            "text": "No association; the odds of the outcome are identical in both exposure groups."
+            "text": "No association; the odds of the outcome are identical in both exposure groups.",
+            "media": []
           },
           {
             "id": "dc2-strong",
-            "text": "A strong positive relationship between exposure and outcome."
+            "text": "A strong positive relationship between exposure and outcome.",
+            "media": []
           },
           {
             "id": "dc2-protective",
-            "text": "A complete protective effect preventing the outcome."
+            "text": "A complete protective effect preventing the outcome.",
+            "media": []
           },
           {
             "id": "dc2-invalid",
-            "text": "An invalid study design requiring re-sampling."
+            "text": "An invalid study design requiring re-sampling.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1607,8 +2092,10 @@
         "moduleId": "categorical-module",
         "level": "intermediate",
         "topic": "Categorical Analysis: Intermediate",
-        "text": "Review the categorical concept: Correct! An Odds Ratio of 1.0 indicates that exposure does not alter the odds of the outcome."
-      }
+        "text": "Review the categorical concept: Correct! An Odds Ratio of 1.0 indicates that exposure does not alter the odds of the outcome.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-var-1",
@@ -1620,19 +2107,23 @@
         "options": [
           {
             "id": "dv1-means",
-            "text": "To test whether three or more population means are equal."
+            "text": "To test whether three or more population means are equal.",
+            "media": []
           },
           {
             "id": "dv1-predict",
-            "text": "To predict a continuous outcome from a single predictor line."
+            "text": "To predict a continuous outcome from a single predictor line.",
+            "media": []
           },
           {
             "id": "dv1-counts",
-            "text": "To count the frequency of categorical survey responses."
+            "text": "To count the frequency of categorical survey responses.",
+            "media": []
           },
           {
             "id": "dv1-rank",
-            "text": "To rank individual outliers by distance from the median."
+            "text": "To rank individual outliers by distance from the median.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1650,8 +2141,10 @@
         "moduleId": "variance-module",
         "level": "beginner",
         "topic": "Analysis of Variance: Beginner",
-        "text": "Review the variance concept: Correct! One-Way ANOVA tests the equality of means across three or more treatment groups."
-      }
+        "text": "Review the variance concept: Correct! One-Way ANOVA tests the equality of means across three or more treatment groups.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-var-2",
@@ -1663,19 +2156,23 @@
         "options": [
           {
             "id": "dv2-posthoc",
-            "text": "Perform post-hoc pairwise comparisons (such as Tukey's HSD) to identify which groups differ."
+            "text": "Perform post-hoc pairwise comparisons (such as Tukey's HSD) to identify which groups differ.",
+            "media": []
           },
           {
             "id": "dv2-accept",
-            "text": "Accept that all group means are identical and conclude the analysis."
+            "text": "Accept that all group means are identical and conclude the analysis.",
+            "media": []
           },
           {
             "id": "dv2-repeat",
-            "text": "Discard the data and rerun independent two-sample t-tests."
+            "text": "Discard the data and rerun independent two-sample t-tests.",
+            "media": []
           },
           {
             "id": "dv2-single",
-            "text": "Assume that only the first and last groups differ without further testing."
+            "text": "Assume that only the first and last groups differ without further testing.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1693,8 +2190,10 @@
         "moduleId": "variance-module",
         "level": "intermediate",
         "topic": "Analysis of Variance: Intermediate",
-        "text": "Review the variance concept: Correct! A significant omnibus F indicates at least one difference exists; post-hoc tests locate them."
-      }
+        "text": "Review the variance concept: Correct! A significant omnibus F indicates at least one difference exists; post-hoc tests locate them.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-reg-1",
@@ -1706,19 +2205,23 @@
         "options": [
           {
             "id": "dr1-strongneg",
-            "text": "A strong negative linear relationship; as one variable increases, the other decreases."
+            "text": "A strong negative linear relationship; as one variable increases, the other decreases.",
+            "media": []
           },
           {
             "id": "dr1-weak",
-            "text": "A very weak association because the number is negative."
+            "text": "A very weak association because the number is negative.",
+            "media": []
           },
           {
             "id": "dr1-curv",
-            "text": "A non-linear parabolic curve with two peaks."
+            "text": "A non-linear parabolic curve with two peaks.",
+            "media": []
           },
           {
             "id": "dr1-causal",
-            "text": "A proven direct causal relationship."
+            "text": "A proven direct causal relationship.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1736,8 +2239,10 @@
         "moduleId": "regression-module",
         "level": "beginner",
         "topic": "Linear Regression: Beginner",
-        "text": "Review the regression concept: Correct! Values close to -1.0 represent strong inverse linear associations."
-      }
+        "text": "Review the regression concept: Correct! Values close to -1.0 represent strong inverse linear associations.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "diag-reg-2",
@@ -1749,19 +2254,23 @@
         "options": [
           {
             "id": "dr2-change",
-            "text": "The expected change in Y for each one-unit increase in X."
+            "text": "The expected change in Y for each one-unit increase in X.",
+            "media": []
           },
           {
             "id": "dr2-intercept",
-            "text": "The predicted value of Y when X equals zero."
+            "text": "The predicted value of Y when X equals zero.",
+            "media": []
           },
           {
             "id": "dr2-r2",
-            "text": "The percentage of variance explained by the model."
+            "text": "The percentage of variance explained by the model.",
+            "media": []
           },
           {
             "id": "dr2-error",
-            "text": "The standard deviation of the residual errors."
+            "text": "The standard deviation of the residual errors.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1779,8 +2288,10 @@
         "moduleId": "regression-module",
         "level": "intermediate",
         "topic": "Linear Regression: Intermediate",
-        "text": "Review the regression concept: Correct! The slope beta1 represents the marginal change in the response Y per unit change in X."
-      }
+        "text": "Review the regression concept: Correct! The slope beta1 represents the marginal change in the response Y per unit change in X.",
+        "media": []
+      },
+      "media": []
     }
   ],
   "final": [
@@ -1794,19 +2305,23 @@
         "options": [
           {
             "id": "fd1-zero",
-            "text": "$0 (Q1 - 1.5 * IQR = 45,000 - 1.5 * 30,000 = $0)."
+            "text": "$0 (Q1 - 1.5 * IQR = 45,000 - 1.5 * 30,000 = $0).",
+            "media": []
           },
           {
             "id": "fd1-30k",
-            "text": "$30,000, which equals the interquartile range directly."
+            "text": "$30,000, which equals the interquartile range directly.",
+            "media": []
           },
           {
             "id": "fd1-15k",
-            "text": "$15,000, calculated as half of the median."
+            "text": "$15,000, calculated as half of the median.",
+            "media": []
           },
           {
             "id": "fd1-none",
-            "text": "Salaries cannot have lower outliers by definition."
+            "text": "Salaries cannot have lower outliers by definition.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1824,8 +2339,10 @@
         "moduleId": "descriptive-module",
         "level": "intermediate",
         "topic": "Descriptive Analysis: Intermediate",
-        "text": "Review the descriptive concept: Correct! IQR = 75,000 - 45,000 = 30,000. Lower fence = 45,000 - 1.5*(30,000) = $0."
-      }
+        "text": "Review the descriptive concept: Correct! IQR = 75,000 - 45,000 = 30,000. Lower fence = 45,000 - 1.5*(30,000) = $0.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-desc-2",
@@ -1837,19 +2354,23 @@
         "options": [
           {
             "id": "fd2-95",
-            "text": "Approximately 95% (within 2 standard deviations: 100 +/- 2*15)."
+            "text": "Approximately 95% (within 2 standard deviations: 100 +/- 2*15).",
+            "media": []
           },
           {
             "id": "fd2-68",
-            "text": "Approximately 68% (within 1 standard deviation)."
+            "text": "Approximately 68% (within 1 standard deviation).",
+            "media": []
           },
           {
             "id": "fd2-997",
-            "text": "Approximately 99.7% (within 3 standard deviations)."
+            "text": "Approximately 99.7% (within 3 standard deviations).",
+            "media": []
           },
           {
             "id": "fd2-50",
-            "text": "Exactly 50% around the median."
+            "text": "Exactly 50% around the median.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1867,8 +2388,10 @@
         "moduleId": "descriptive-module",
         "level": "upperIntermediate",
         "topic": "Descriptive Analysis: UpperIntermediate",
-        "text": "Review the descriptive concept: Correct! By the Empirical Rule, approximately 95% of observations fall within mu +/- 2*sigma (70 to 130)."
-      }
+        "text": "Review the descriptive concept: Correct! By the Empirical Rule, approximately 95% of observations fall within mu +/- 2*sigma (70 to 130).",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-desc-3",
@@ -1880,19 +2403,23 @@
         "options": [
           {
             "id": "fd3-log",
-            "text": "Natural logarithm or Box-Cox power transformation."
+            "text": "Natural logarithm or Box-Cox power transformation.",
+            "media": []
           },
           {
             "id": "fd3-sq",
-            "text": "Squaring the values to expand high values."
+            "text": "Squaring the values to expand high values.",
+            "media": []
           },
           {
             "id": "fd3-neg",
-            "text": "Multiplying all numbers by -1."
+            "text": "Multiplying all numbers by -1.",
+            "media": []
           },
           {
             "id": "fd3-mod",
-            "text": "Replacing the mean with the harmonic mode."
+            "text": "Replacing the mean with the harmonic mode.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1910,8 +2437,10 @@
         "moduleId": "descriptive-module",
         "level": "advanced",
         "topic": "Descriptive Analysis: Advanced",
-        "text": "Review the descriptive concept: Correct! Logarithmic and Box-Cox transformations compress right-tail dispersion and stabilize variance."
-      }
+        "text": "Review the descriptive concept: Correct! Logarithmic and Box-Cox transformations compress right-tail dispersion and stabilize variance.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-prob-1",
@@ -1923,19 +2452,23 @@
         "options": [
           {
             "id": "fp1-bin",
-            "text": "Binomial probability formula: P(X=7) = (10 choose 7) * (0.5)^7 * (0.5)^3."
+            "text": "Binomial probability formula: P(X=7) = (10 choose 7) * (0.5)^7 * (0.5)^3.",
+            "media": []
           },
           {
             "id": "fp1-poi",
-            "text": "Poisson formula: e^(-5) * 5^7 / 7!."
+            "text": "Poisson formula: e^(-5) * 5^7 / 7!.",
+            "media": []
           },
           {
             "id": "fp1-geo",
-            "text": "Geometric formula: (0.5)^6 * (0.5)."
+            "text": "Geometric formula: (0.5)^6 * (0.5).",
+            "media": []
           },
           {
             "id": "fp1-hyp",
-            "text": "Hypergeometric sampling without replacement formula."
+            "text": "Hypergeometric sampling without replacement formula.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1953,8 +2486,10 @@
         "moduleId": "probability-module",
         "level": "intermediate",
         "topic": "Probability Theory: Intermediate",
-        "text": "Review the probability concept: Correct! Fixed independent trials with constant probability are modeled with the Binomial formula."
-      }
+        "text": "Review the probability concept: Correct! Fixed independent trials with constant probability are modeled with the Binomial formula.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-prob-2",
@@ -1966,19 +2501,23 @@
         "options": [
           {
             "id": "fp2-five",
-            "text": "5, calculated as sigma / sqrt(n) = 40 / sqrt(64) = 40 / 8 = 5."
+            "text": "5, calculated as sigma / sqrt(n) = 40 / sqrt(64) = 40 / 8 = 5.",
+            "media": []
           },
           {
             "id": "fp2-40",
-            "text": "40, because standard error equals population standard deviation."
+            "text": "40, because standard error equals population standard deviation.",
+            "media": []
           },
           {
             "id": "fp2-0625",
-            "text": "0.625, calculated as 40 / 64."
+            "text": "0.625, calculated as 40 / 64.",
+            "media": []
           },
           {
             "id": "fp2-25",
-            "text": "25, calculated as 200 / 8."
+            "text": "25, calculated as 200 / 8.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -1996,8 +2535,10 @@
         "moduleId": "probability-module",
         "level": "upperIntermediate",
         "topic": "Probability Theory: UpperIntermediate",
-        "text": "Review the probability concept: Correct! Standard Error = sigma / sqrt(n) = 40 / 8 = 5."
-      }
+        "text": "Review the probability concept: Correct! Standard Error = sigma / sqrt(n) = 40 / 8 = 5.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-prob-3",
@@ -2009,19 +2550,23 @@
         "options": [
           {
             "id": "fp3-straight",
-            "text": "The sample points fall closely along a straight 45-degree reference diagonal line."
+            "text": "The sample points fall closely along a straight 45-degree reference diagonal line.",
+            "media": []
           },
           {
             "id": "fp3-s",
-            "text": "The points form a distinct S-shaped sinusoidal wave."
+            "text": "The points form a distinct S-shaped sinusoidal wave.",
+            "media": []
           },
           {
             "id": "fp3-u",
-            "text": "The points form a sharp U-shaped parabolic curve."
+            "text": "The points form a sharp U-shaped parabolic curve.",
+            "media": []
           },
           {
             "id": "fp3-vert",
-            "text": "The points cluster vertically on the zero axis."
+            "text": "The points cluster vertically on the zero axis.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2039,8 +2584,10 @@
         "moduleId": "probability-module",
         "level": "advanced",
         "topic": "Probability Theory: Advanced",
-        "text": "Review the probability concept: Correct! Conformity to a straight diagonal line confirms that empirical quantiles match theoretical normal quantiles."
-      }
+        "text": "Review the probability concept: Correct! Conformity to a straight diagonal line confirms that empirical quantiles match theoretical normal quantiles.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-inf-1",
@@ -2052,19 +2599,23 @@
         "options": [
           {
             "id": "fi1-ci",
-            "text": "In 95% of repeated random samples from this population, the calculated interval will contain the true population mean."
+            "text": "In 95% of repeated random samples from this population, the calculated interval will contain the true population mean.",
+            "media": []
           },
           {
             "id": "fi1-95data",
-            "text": "95% of all individual values in the sample fall between 42.1 and 48.7."
+            "text": "95% of all individual values in the sample fall between 42.1 and 48.7.",
+            "media": []
           },
           {
             "id": "fi1-param",
-            "text": "There is a 95% probability that the sample mean varies across trials."
+            "text": "There is a 95% probability that the sample mean varies across trials.",
+            "media": []
           },
           {
             "id": "fi1-certain",
-            "text": "The population mean is proven to equal the midpoint 45.4."
+            "text": "The population mean is proven to equal the midpoint 45.4.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2082,8 +2633,10 @@
         "moduleId": "inferential-module",
         "level": "intermediate",
         "topic": "Hypothesis Testing: Intermediate",
-        "text": "Review the inferential concept: Correct! The 95% confidence level reflects the long-run capture rate across repeated sampling."
-      }
+        "text": "Review the inferential concept: Correct! The 95% confidence level reflects the long-run capture rate across repeated sampling.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-inf-2",
@@ -2095,19 +2648,23 @@
         "options": [
           {
             "id": "fi2-welch",
-            "text": "Welch's t-test (which adjusts degrees of freedom for unequal variances)."
+            "text": "Welch's t-test (which adjusts degrees of freedom for unequal variances).",
+            "media": []
           },
           {
             "id": "fi2-pooled",
-            "text": "Standard pooled-variance Student's t-test."
+            "text": "Standard pooled-variance Student's t-test.",
+            "media": []
           },
           {
             "id": "fi2-z",
-            "text": "Paired Z-test without variance adjustment."
+            "text": "Paired Z-test without variance adjustment.",
+            "media": []
           },
           {
             "id": "fi2-chi",
-            "text": "One-sample Goodness-of-Fit test."
+            "text": "One-sample Goodness-of-Fit test.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2125,8 +2682,10 @@
         "moduleId": "inferential-module",
         "level": "upperIntermediate",
         "topic": "Hypothesis Testing: UpperIntermediate",
-        "text": "Review the inferential concept: Correct! Welch's t-test handles unequal population variances reliably and controls Type I error."
-      }
+        "text": "Review the inferential concept: Correct! Welch's t-test handles unequal population variances reliably and controls Type I error.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-inf-3",
@@ -2138,19 +2697,23 @@
         "options": [
           {
             "id": "fi3-bonf",
-            "text": "alpha_adj = 0.05 / 20 = 0.0025."
+            "text": "alpha_adj = 0.05 / 20 = 0.0025.",
+            "media": []
           },
           {
             "id": "fi3-const",
-            "text": "alpha_adj = 0.05, because each test is independent."
+            "text": "alpha_adj = 0.05, because each test is independent.",
+            "media": []
           },
           {
             "id": "fi3-one",
-            "text": "alpha_adj = 1.0 (no threshold)."
+            "text": "alpha_adj = 1.0 (no threshold).",
+            "media": []
           },
           {
             "id": "fi3-sqrt",
-            "text": "alpha_adj = 0.05 / sqrt(20) = 0.0112."
+            "text": "alpha_adj = 0.05 / sqrt(20) = 0.0112.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2168,8 +2731,10 @@
         "moduleId": "inferential-module",
         "level": "advanced",
         "topic": "Hypothesis Testing: Advanced",
-        "text": "Review the inferential concept: Correct! The Bonferroni correction divides nominal alpha by the number of comparisons: 0.05 / 20 = 0.0025."
-      }
+        "text": "Review the inferential concept: Correct! The Bonferroni correction divides nominal alpha by the number of comparisons: 0.05 / 20 = 0.0025.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-cat-1",
@@ -2181,19 +2746,23 @@
         "options": [
           {
             "id": "fc1-formula",
-            "text": "E = (Row i Total * Column j Total) / Grand Sample Total."
+            "text": "E = (Row i Total * Column j Total) / Grand Sample Total.",
+            "media": []
           },
           {
             "id": "fc1-mean",
-            "text": "E = (Observed value + Grand Total) / 2."
+            "text": "E = (Observed value + Grand Total) / 2.",
+            "media": []
           },
           {
             "id": "fc1-equal",
-            "text": "E = Grand Total divided by the number of rows."
+            "text": "E = Grand Total divided by the number of rows.",
+            "media": []
           },
           {
             "id": "fc1-sub",
-            "text": "E = Row Total minus Column Total."
+            "text": "E = Row Total minus Column Total.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2211,8 +2780,10 @@
         "moduleId": "categorical-module",
         "level": "intermediate",
         "topic": "Categorical Analysis: Intermediate",
-        "text": "Review the categorical concept: Correct! Under independence, expected count = (Row Total * Column Total) / Grand Total."
-      }
+        "text": "Review the categorical concept: Correct! Under independence, expected count = (Row Total * Column Total) / Grand Total.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-cat-2",
@@ -2224,19 +2795,23 @@
         "options": [
           {
             "id": "fc2-fisher",
-            "text": "Fisher's Exact Test, which calculates exact hypergeometric probabilities for small counts."
+            "text": "Fisher's Exact Test, which calculates exact hypergeometric probabilities for small counts.",
+            "media": []
           },
           {
             "id": "fc2-z",
-            "text": "Standard Z-test with normal continuity approximation."
+            "text": "Standard Z-test with normal continuity approximation.",
+            "media": []
           },
           {
             "id": "fc2-anova",
-            "text": "One-Way ANOVA with Welch correction."
+            "text": "One-Way ANOVA with Welch correction.",
+            "media": []
           },
           {
             "id": "fc2-regression",
-            "text": "Multiple linear regression."
+            "text": "Multiple linear regression.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2254,8 +2829,10 @@
         "moduleId": "categorical-module",
         "level": "upperIntermediate",
         "topic": "Categorical Analysis: UpperIntermediate",
-        "text": "Review the categorical concept: Correct! When expected counts are small (< 5), Fisher's Exact Test provides exact p-values."
-      }
+        "text": "Review the categorical concept: Correct! When expected counts are small (< 5), Fisher's Exact Test provides exact p-values.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-cat-3",
@@ -2267,19 +2844,23 @@
         "options": [
           {
             "id": "fc3-four",
-            "text": "4.0 (Risk in exposed / Risk in unexposed = 0.08 / 0.02 = 4.0)."
+            "text": "4.0 (Risk in exposed / Risk in unexposed = 0.08 / 0.02 = 4.0).",
+            "media": []
           },
           {
             "id": "fc3-six",
-            "text": "6.0, calculated as the risk difference 8% - 2%."
+            "text": "6.0, calculated as the risk difference 8% - 2%.",
+            "media": []
           },
           {
             "id": "fc3-zero",
-            "text": "0.25, the inverse ratio."
+            "text": "0.25, the inverse ratio.",
+            "media": []
           },
           {
             "id": "fc3-ten",
-            "text": "10.0, the sum of the two percentages."
+            "text": "10.0, the sum of the two percentages.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2297,8 +2878,10 @@
         "moduleId": "categorical-module",
         "level": "advanced",
         "topic": "Categorical Analysis: Advanced",
-        "text": "Review the categorical concept: Correct! Relative Risk = 0.08 / 0.02 = 4.0. Exposed individuals have 4 times the risk."
-      }
+        "text": "Review the categorical concept: Correct! Relative Risk = 0.08 / 0.02 = 4.0. Exposed individuals have 4 times the risk.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-var-1",
@@ -2310,19 +2893,23 @@
         "options": [
           {
             "id": "fv1-msb",
-            "text": "MSB = Sum of Squares Between (SSB) / Degrees of Freedom Between (k - 1)."
+            "text": "MSB = Sum of Squares Between (SSB) / Degrees of Freedom Between (k - 1).",
+            "media": []
           },
           {
             "id": "fv1-sub",
-            "text": "MSB = Total Sum of Squares minus Error Sum of Squares."
+            "text": "MSB = Total Sum of Squares minus Error Sum of Squares.",
+            "media": []
           },
           {
             "id": "fv1-mult",
-            "text": "MSB = SSB multiplied by total sample size N."
+            "text": "MSB = SSB multiplied by total sample size N.",
+            "media": []
           },
           {
             "id": "fv1-sqrt",
-            "text": "MSB = Square root of the F-ratio."
+            "text": "MSB = Square root of the F-ratio.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2340,8 +2927,10 @@
         "moduleId": "variance-module",
         "level": "intermediate",
         "topic": "Analysis of Variance: Intermediate",
-        "text": "Review the variance concept: Correct! Mean square is always calculated as Sum of Squares divided by its degrees of freedom."
-      }
+        "text": "Review the variance concept: Correct! Mean square is always calculated as Sum of Squares divided by its degrees of freedom.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-var-2",
@@ -2353,19 +2942,23 @@
         "options": [
           {
             "id": "fv2-inter",
-            "text": "The effect of Factor A on the response variable depends on the level of Factor B."
+            "text": "The effect of Factor A on the response variable depends on the level of Factor B.",
+            "media": []
           },
           {
             "id": "fv2-none",
-            "text": "Neither Factor A nor Factor B has any main effect on the response."
+            "text": "Neither Factor A nor Factor B has any main effect on the response.",
+            "media": []
           },
           {
             "id": "fv2-paral",
-            "text": "The response lines on a profile interaction plot are completely parallel."
+            "text": "The response lines on a profile interaction plot are completely parallel.",
+            "media": []
           },
           {
             "id": "fv2-error",
-            "text": "The ANOVA model has zero residual error."
+            "text": "The ANOVA model has zero residual error.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2383,8 +2976,10 @@
         "moduleId": "variance-module",
         "level": "upperIntermediate",
         "topic": "Analysis of Variance: UpperIntermediate",
-        "text": "Review the variance concept: Correct! Interaction means that the effect of one factor changes across levels of the other factor."
-      }
+        "text": "Review the variance concept: Correct! Interaction means that the effect of one factor changes across levels of the other factor.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-var-3",
@@ -2396,19 +2991,23 @@
         "options": [
           {
             "id": "fv3-spher",
-            "text": "Sphericity (tested via Mauchly's test, corrected with Greenhouse-Geisser if violated)."
+            "text": "Sphericity (tested via Mauchly's test, corrected with Greenhouse-Geisser if violated).",
+            "media": []
           },
           {
             "id": "fv3-homo",
-            "text": "Homogeneity of regression slopes."
+            "text": "Homogeneity of regression slopes.",
+            "media": []
           },
           {
             "id": "fv3-indep",
-            "text": "Complete independence of repeated observations."
+            "text": "Complete independence of repeated observations.",
+            "media": []
           },
           {
             "id": "fv3-bimod",
-            "text": "Bimodality of condition medians."
+            "text": "Bimodality of condition medians.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2426,8 +3025,10 @@
         "moduleId": "variance-module",
         "level": "advanced",
         "topic": "Analysis of Variance: Advanced",
-        "text": "Review the variance concept: Correct! Sphericity is the repeated measures compound symmetry assumption, evaluated by Mauchly's test."
-      }
+        "text": "Review the variance concept: Correct! Sphericity is the repeated measures compound symmetry assumption, evaluated by Mauchly's test.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-reg-1",
@@ -2439,19 +3040,23 @@
         "options": [
           {
             "id": "fr1-min",
-            "text": "Minimizing the sum of squared vertical residuals: sum((Y_i - Y_hat_i)^2)."
+            "text": "Minimizing the sum of squared vertical residuals: sum((Y_i - Y_hat_i)^2).",
+            "media": []
           },
           {
             "id": "fr1-abs",
-            "text": "Maximizing the sum of absolute errors between points."
+            "text": "Maximizing the sum of absolute errors between points.",
+            "media": []
           },
           {
             "id": "fr1-zero",
-            "text": "Setting the correlation coefficient to zero."
+            "text": "Setting the correlation coefficient to zero.",
+            "media": []
           },
           {
             "id": "fr1-dist",
-            "text": "Minimizing perpendicular Euclidean distances for all coordinates."
+            "text": "Minimizing perpendicular Euclidean distances for all coordinates.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2469,8 +3074,10 @@
         "moduleId": "regression-module",
         "level": "intermediate",
         "topic": "Linear Regression: Intermediate",
-        "text": "Review the regression concept: Correct! OLS estimates minimize the sum of squared vertical residuals (errors)."
-      }
+        "text": "Review the regression concept: Correct! OLS estimates minimize the sum of squared vertical residuals (errors).",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-reg-2",
@@ -2482,19 +3089,23 @@
         "options": [
           {
             "id": "fr2-vif",
-            "text": "Variance Inflation Factor (VIF), where VIF > 5 to 10 indicates high multicollinearity."
+            "text": "Variance Inflation Factor (VIF), where VIF > 5 to 10 indicates high multicollinearity.",
+            "media": []
           },
           {
             "id": "fr2-f",
-            "text": "The omnibus F-statistic."
+            "text": "The omnibus F-statistic.",
+            "media": []
           },
           {
             "id": "fr2-intercept",
-            "text": "The standard error of the Y-intercept."
+            "text": "The standard error of the Y-intercept.",
+            "media": []
           },
           {
             "id": "fr2-df",
-            "text": "Residual degrees of freedom."
+            "text": "Residual degrees of freedom.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2512,8 +3123,10 @@
         "moduleId": "regression-module",
         "level": "upperIntermediate",
         "topic": "Linear Regression: UpperIntermediate",
-        "text": "Review the regression concept: Correct! VIF measures how much predictor variance is inflated due to collinearity with other predictors."
-      }
+        "text": "Review the regression concept: Correct! VIF measures how much predictor variance is inflated due to collinearity with other predictors.",
+        "media": []
+      },
+      "media": []
     },
     {
       "id": "final-reg-3",
@@ -2525,19 +3138,23 @@
         "options": [
           {
             "id": "fr3-homo",
-            "text": "Homoscedasticity (equal residual variance across all fitted values; indicates heteroscedasticity)."
+            "text": "Homoscedasticity (equal residual variance across all fitted values; indicates heteroscedasticity).",
+            "media": []
           },
           {
             "id": "fr3-linear",
-            "text": "Linearity of the underlying relationship."
+            "text": "Linearity of the underlying relationship.",
+            "media": []
           },
           {
             "id": "fr3-indep",
-            "text": "Independence of explanatory variable measurements."
+            "text": "Independence of explanatory variable measurements.",
+            "media": []
           },
           {
             "id": "fr3-norm",
-            "text": "Normality of independent variable predictors."
+            "text": "Normality of independent variable predictors.",
+            "media": []
           }
         ],
         "correctOptionIds": [
@@ -2555,8 +3172,10 @@
         "moduleId": "regression-module",
         "level": "advanced",
         "topic": "Linear Regression: Advanced",
-        "text": "Review the regression concept: Correct! An expanding funnel pattern demonstrates heteroscedasticity (non-constant residual variance)."
-      }
+        "text": "Review the regression concept: Correct! An expanding funnel pattern demonstrates heteroscedasticity (non-constant residual variance).",
+        "media": []
+      },
+      "media": []
     }
   ],
   "sources": [
@@ -2743,6 +3362,13 @@
 
     document.body.appendChild(container);
     updateModalBadges();
+
+    document.addEventListener("keydown", function onEsc(e) {
+      if (e.key === "Escape") {
+        window.closeScormPlayerModal();
+        document.removeEventListener("keydown", onEsc);
+      }
+    });
   }
 
   // Toast / notification helper
@@ -2764,10 +3390,45 @@
 
   // Temp publish and launch SCORM player in BOTH in-page modal AND new tab
   window.tempPublishAndOpenPlayer = async function(project) {
-    const proj = project || window.__STATISTICS_STARTER;
-    if (!proj) {
+    const rawProj = project || window.__STATISTICS_STARTER;
+    if (!rawProj) {
       console.error("No project provided for preview.");
       return;
+    }
+
+    // Ensure theme.elevation and contentStyles are completely populated
+    const proj = JSON.parse(JSON.stringify(rawProj));
+    if (!proj.theme) proj.theme = {};
+    if (!proj.theme.elevation) {
+      proj.theme.elevation = {
+        card: "0 10px 30px rgba(15,23,42,.08)",
+        raised: "0 20px 60px rgba(15,23,42,.14)"
+      };
+    }
+    if (!proj.theme.radii) {
+      proj.theme.radii = { sm: 8, md: 12, lg: 18, pill: 999 };
+    }
+    if (!proj.theme.fontFamily) {
+      proj.theme.fontFamily = "Inter, system-ui, -apple-system, sans-serif";
+    }
+
+    const defaultStyles = {
+      essential: { background: "#f8fafc", color: "#0f172a", accent: "#1d4ed8", fontSize: 17, textAlign: "left", padding: 24, borderRadius: 14 },
+      beginner: { background: "#ffffff", color: "#0f172a", accent: "#0284c7", fontSize: 17, textAlign: "left", padding: 24, borderRadius: 14 },
+      intermediate: { background: "#ffffff", color: "#0f172a", accent: "#1d4ed8", fontSize: 17, textAlign: "left", padding: 24, borderRadius: 14 },
+      upperIntermediate: { background: "#ffffff", color: "#0f172a", accent: "#d97706", fontSize: 17, textAlign: "left", padding: 24, borderRadius: 14 },
+      advanced: { background: "#ffffff", color: "#0f172a", accent: "#7c3aed", fontSize: 17, textAlign: "left", padding: 24, borderRadius: 14 }
+    };
+
+    if (Array.isArray(proj.modules)) {
+      for (const m of proj.modules) {
+        if (!m.contentStyles || !m.contentStyles.essential) {
+          m.contentStyles = JSON.parse(JSON.stringify(defaultStyles));
+        }
+        if (!m.contentMedia) {
+          m.contentMedia = { essential: [], beginner: [], intermediate: [], upperIntermediate: [], advanced: [] };
+        }
+      }
     }
 
     showPublishToast("Packaging & temp publishing SCORM 2004 course…", true);
@@ -2806,8 +3467,13 @@
     }
 
     try {
+      let waitCount = 0;
+      while (typeof window.__buildScormZip !== "function" && waitCount < 25) {
+        await new Promise(res => setTimeout(res, 100));
+        waitCount++;
+      }
       if (typeof window.__buildScormZip !== "function") {
-        throw new Error("SCORM packaging generator (__buildScormZip) not yet ready. Please try again in 1 second.");
+        throw new Error("SCORM packaging engine initializing, please try again in a moment.");
       }
 
       // Generate the package ZIP in memory using the native studio engine
