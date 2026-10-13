@@ -1,6 +1,9 @@
 # Adaptive Micro-Learn SCORM Builder
 
-A browser-based authoring studio for creating adaptive, micro-learning SCORM 2004 content. This project gives you a fast way to assemble learning modules, define branch logic, validate the structure, and package the result for upload into a learning management system (LMS).
+> Live demo: https://dskhanal.github.io/adaptive-micro-learn-SCORM-builder/
+> Launch the builder directly in the browser and start creating adaptive, micro-learning SCORM 2004 content.
+
+A browser-based authoring studio for creating adaptive, micro-learning SCORM 2004 content. This project gives you a fast way to assemble learning modules, define branch logic, validate the structure, and export learner-ready content.
 
 This builder is designed for educators, instructional designers, and developers who want to create compact, learner-responsive training experiences without building a full custom LMS tool from scratch.
 
@@ -33,7 +36,7 @@ The application loads in the browser and allows you to create or edit a project 
 - final assessment content
 - validation and preview state
 
-The PHP API is used for shared-project persistence. It validates incoming project data, accepts a JSON payload, and stores it safely in a configured data directory. This makes it possible to collaborate around a single project file without relying on a heavy backend framework.
+The PHP API is used for shared-project persistence. It validates incoming project data, accepts a JSON payload, and stores it safely in a configured data directory. This makes it possible to collaborate on course design while keeping the authoring experience lightweight.
 
 ## Why this is useful
 
@@ -97,7 +100,7 @@ Important: the app will not use shared storage safely until the access key is ch
 
 ## Production deployment notes
 
-This repository is not a pure GitHub Pages project because the app includes a PHP API (`api/project.php`) and project persistence logic. GitHub Pages can host the static front-end, but it cannot run the PHP backend required for shared project saving.
+This repository is not a pure GitHub Pages project because the app includes a PHP API (`api/project.php`) and project persistence logic. GitHub Pages can host the static front-end, but it cannot run PHP server-side request handlers or secure persistence logic directly.
 
 For production hosting, use a PHP-capable environment such as:
 
@@ -139,13 +142,13 @@ A common workflow looks like this:
 
 ## Summary
 
-The Adaptive Micro-Learn SCORM Builder is a lightweight authoring system for building small, adaptive, SCORM-ready learning experiences. It is built to be easy to run locally, easy to understand, and straightforward to deploy on a standard PHP hosting platform.
+The Adaptive Micro-Learn SCORM Builder is a lightweight authoring system for building small, adaptive, SCORM-ready learning experiences. It is built to be easy to run locally, easy to understand, and easy to extend. Use the browser-based app to author content, validate it, and package it for delivery in a learner-friendly format.
 
 If you want to get started quickly, run the app locally with PHP and open the repository in a browser. For production use, configure the secure shared-project key and deploy behind a PHP-capable web server.
 
 ## License
 
-This project does not appear to declare a license in the repository root, so check with the repository owner or upstream project documentation before using it in commercial or public distribution workflows.
+This project does not appear to declare a license in the repository root, so check with the repository owner or upstream project documentation before using it in commercial or public distribution.
 
 ## Notes for contributors
 
@@ -158,4 +161,3 @@ If you plan to extend this tool, the most likely areas to improve are:
 - deployment documentation for specific hosting providers
 
 This repository is a strong base for building a scalable adaptive course authoring system without heavy infrastructure requirements.
-
