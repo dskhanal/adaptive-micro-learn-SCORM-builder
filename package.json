@@ -1,6 +1,6 @@
 {
   "name": "adaptive-micro-learn-scorm-builder",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "description": "Static SCORM authoring, finalisation and folder testing",

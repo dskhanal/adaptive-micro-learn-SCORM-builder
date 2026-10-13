@@ -1,4 +1,4 @@
-# Adaptive SCORM Studio 2.0 — guided authoring and live simulation
+# Adaptive SCORM Studio 2.1 — modular Kitten TTS audio
 
 ## Start
 
@@ -134,3 +134,31 @@ Run the included checks with Node.js:
     node tests/run.cjs
 
 These use component trees and DOM test doubles; they do not replace real-browser visual or accessibility testing.
+
+
+## Kitten TTS narration
+
+In **04 Modules**, open **Audio · Kitten TTS** beneath the content editor:
+
+- Enable or disable audio for the whole course (enabled by default).
+- Choose one of eight English voices.
+- Enable or disable narration for the selected essential/mastery section.
+- Optionally enter a spoken version, useful for mathematical formulas and abbreviations. Empty means read the content text. Narration follows edits and survives JSON save/import.
+
+Each essential section, mastery-tier section and targeted question review offers **Generate & play**, native play/pause, a seek timeline, volume, Stop and playback speeds from 0.75× to 2×. Audio is never started automatically. Only one clip plays at a time. Navigating away stops playback. Audio playback does not change SCORM completion or scores. Listening is optional.
+
+The same controls are available in the module live preview, separate Test window and exported course. The first request loads the local model and generates speech; this can take time on slower devices. Subsequent requests reuse the engine and up to 12 clips / 48 MiB of session memory. Clips are not persisted in project JSON or SCORM suspend data. Reloading generates them again.
+
+The speech engine runs in a dedicated Web Worker. All model, voice, dictionary and WebAssembly files are bundled in this distribution and in audio-enabled exports; no API key, external speech request or PHP service is required. SDK analytics are disabled. Audio adds approximately 40 MiB of uncompressed assets. Disabling course audio excludes the audio folder from Test and Export. The exported staging/launcher workflow is unchanged.
+
+Use a modern browser with WebAssembly SIMD and Web Workers. The static host/LMS must serve the included `.wasm` file and allow same-origin workers and WebAssembly execution; restrictive LMS content policies may need adjustment. This is browser-generated audio, not pre-rendered recordings. Kitten's browser SDK is a developer preview. Full browser/LMS acceptance remains a deployment check. The voices are English; review pronunciation and use the optional spoken version for technical notation.
+
+### Modular files
+
+- `audio/audio-player.js`: controls, playback lifecycle and bounded clip cache; independent of SCORM tracking.
+- `audio/kitten-worker.js`: Kitten TTS adapter and local model initialization. Its message interface accepts `{id,text,voice}` and returns progress, an audio WAV buffer, or an error.
+- `audio-package.js`: includes audio dependencies only when Test/Export is requested and course audio is enabled.
+- `audio/asset-manifest.json`: exact file sizes and SHA-256 hashes. Rebuild with `node scripts/audio-manifest.cjs` after changing an audio asset.
+- `audio/THIRD-PARTY-NOTICES.txt` and `audio/licenses/`: upstream attribution and licenses.
+
+Run `node tests/run.cjs` for component/simulation/control checks. Run `node tests/kitten-inference.cjs` separately for a real local-model synthesis check (Node 20+ recommended). This headless check verifies WAV output, not browser playback or pronunciation.

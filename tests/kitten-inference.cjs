@@ -1,0 +1,10 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const base=path.resolve(__dirname,'../audio');
+const ctx={console,URL,TextEncoder,TextDecoder,Uint8Array,ArrayBuffer,Float32Array,Int32Array,BigInt64Array,DataView,WebAssembly,Response,Blob,performance,setTimeout,clearTimeout,setImmediate,crypto:require('crypto').webcrypto,navigator:{hardwareConcurrency:1,userAgent:'test'},location:{href:'https://local/audio/kitten-worker.js'}};
+ctx.self=ctx;ctx.globalThis=ctx;ctx.fetch=async url=>{const u=new URL(url);if(u.host!=='local')throw Error('Unexpected external request '+u);return new Response(fs.readFileSync(path.join(base,u.pathname.replace('/audio/',''))),{headers:{'Content-Type':u.pathname.endsWith('.wasm')?'application/wasm':'application/octet-stream'}})};
+vm.createContext(ctx);
+ctx.importScripts=file=>vm.runInContext(fs.readFileSync(path.join(base,file),'utf8'),ctx);
+ctx.postMessage=msg=>{if(msg.type==='audio'){const b=Buffer.from(msg.buffer);console.log('WAV',b.length,b.subarray(0,12).toString(),b.readUInt32LE(24));process.exit(b.subarray(0,4).toString()==='RIFF'?0:1)}if(msg.type==='error'){console.error(msg);process.exit(1)}console.log(msg.message)};
+vm.runInContext(fs.readFileSync(base+'/kitten-worker.js','utf8'),ctx);
+ctx.onmessage({data:{id:1,text:'Statistics helps us learn from data.',voice:'bella'}});
+setTimeout(()=>{console.error('Timed out');process.exit(1)},120000);

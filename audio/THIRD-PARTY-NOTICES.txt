@@ -1,0 +1,21 @@
+Kitten TTS modular narration assets
+
+KittenML/KittenTTS-web (developer preview, package version 0.1.0):
+https://github.com/KittenML/KittenTTS-web
+Unmodified examples/html/assets/kittentts-web.js bundle; Apache-2.0.
+Includes compiled CEPhonemizer and ONNX Runtime JavaScript. Upstream license notices retained in bundle.
+
+KittenML/kitten-tts-nano-0.8-int8: Apache-2.0 model and voices.
+https://huggingface.co/KittenML/kitten-tts-nano-0.8-int8
+
+ONNX Runtime Web 1.26.0: MIT; see licenses/ONNX-Runtime-LICENSE.
+https://github.com/microsoft/onnxruntime
+
+English pronunciation dictionary/rules: eSpeak NG, GPL-3.0-or-later;
+source files included unmodified as vendor/en_rules and vendor/en_list.
+Commit 59eb19938f12e30881c81d86ce4a7de25414c9f4.
+https://github.com/espeak-ng/espeak-ng
+See licenses/espeak-ng-COPYING.
+
+All assets downloaded 2026-10-13. SDK analytics explicitly disabled.
+Hashes in asset-manifest.json identify the exact bundled files.

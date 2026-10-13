@@ -1,7 +1,7 @@
 importScripts('./package-store.js','./test-runtime-controls.js');
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
-const types={html:'text/html',js:'application/javascript',css:'text/css',json:'application/json',xml:'application/xml',svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',mp4:'video/mp4',woff2:'font/woff2'};
+const types={wasm:'application/wasm',wav:'audio/wav',html:'text/html',js:'application/javascript',css:'text/css',json:'application/json',xml:'application/xml',svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',mp4:'video/mp4',woff2:'font/woff2'};
 self.addEventListener('fetch',event=>{
  const root=new URL('./__finalised/',self.registration.scope),url=new URL(event.request.url);
  if(url.origin!==root.origin||!url.pathname.startsWith(root.pathname))return;

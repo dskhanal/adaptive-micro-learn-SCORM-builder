@@ -1,0 +1,76 @@
+{
+  "provider": "Kitten TTS",
+  "model": "nano-int8-0.8",
+  "files": [
+    {
+      "path": "audio/THIRD-PARTY-NOTICES.txt",
+      "bytes": 945,
+      "sha256": "0ce7eed15f8631ad26f61dab85e40517f6180294b43c2fde5c5af9c721fb21d0"
+    },
+    {
+      "path": "audio/audio-player.css",
+      "bytes": 978,
+      "sha256": "c1bccefa0edb400f9bf387f12c807bc3d98913d910f29999c9a3cf833f653990"
+    },
+    {
+      "path": "audio/audio-player.js",
+      "bytes": 5841,
+      "sha256": "852173fcb11d6ec066bfd1e6dffde1575047e31d6e0aad51cc24d6a76cb06ca3"
+    },
+    {
+      "path": "audio/kitten-worker.js",
+      "bytes": 2129,
+      "sha256": "58ab662cff712fb37467e2c6737b458b5ea00d6832e6c7304bc82c57d37f34b0"
+    },
+    {
+      "path": "audio/licenses/KittenTTS-Web-LICENSE",
+      "bytes": 10706,
+      "sha256": "ca47d208e3861e3e83166fa7ce6849802d8941a15ae49452eebec84325bcc527"
+    },
+    {
+      "path": "audio/licenses/ONNX-Runtime-LICENSE",
+      "bytes": 1073,
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+    },
+    {
+      "path": "audio/licenses/espeak-ng-COPYING",
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "path": "audio/licenses/model-card.md",
+      "bytes": 741,
+      "sha256": "ff39adbcb653e9beaa612b405c4e301ee62eb4201b32dd77ae36f4078537b8ef"
+    },
+    {
+      "path": "audio/models/kitten_tts_nano_v0_8.onnx",
+      "bytes": 24369971,
+      "sha256": "f7b0afcbee92870b32b8e0276d855b954dc25470c9f051b376ac7eee537c76fc"
+    },
+    {
+      "path": "audio/models/voices.npz",
+      "bytes": 3278902,
+      "sha256": "8aa7cee235abb0739cb51e6559685f65a4dacd95568833d05699b1633f519b3f"
+    },
+    {
+      "path": "audio/vendor/en_list",
+      "bytes": 102788,
+      "sha256": "24eb79018ed6253c10682096de672ce9265c1fe15c3e19e7f754d57a0fcd9790"
+    },
+    {
+      "path": "audio/vendor/en_rules",
+      "bytes": 161691,
+      "sha256": "8e75e9341ea735cc514b29a7d3a95c6c241c1cc176ad43e5699b8f7f66ab3194"
+    },
+    {
+      "path": "audio/vendor/kittentts-web.js",
+      "bytes": 1248224,
+      "sha256": "6bbc1d35555d6c7f25dc9d69c9f870f5d436b6040a58240ab61c30d60126899c"
+    },
+    {
+      "path": "audio/vendor/ort-wasm-simd-threaded.wasm",
+      "bytes": 13022405,
+      "sha256": "040d52ce5066707a10d45cb9500c35e70a9c2fb33c4fb63428da9ae45b956b97"
+    }
+  ]
+}

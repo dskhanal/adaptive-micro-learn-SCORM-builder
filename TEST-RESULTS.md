@@ -64,3 +64,24 @@ Suggested browser acceptance:
 4. Edit and answer each interaction type. Verify immediate feedback, remediation and Reset answer.
 5. Mark design preview reviewed, edit content, and confirm that review becomes incomplete.
 6. Use Test and Export; verify the independent Test window, retained export launcher and formatting inside the course.
+
+
+## 2.1 modular Kitten TTS
+
+Passed:
+
+- Actual bundled SDK, model, voices, dictionary and ONNX WebAssembly generated a RIFF/WAV (229,244 bytes, 24,000 Hz) from “Statistics helps us learn from data.” in a Node VM with local-only fetch. No external fetch was permitted. This is real synthesis, not a provider mock.
+- All 25 finalised files were byte-identical to the corresponding ZIP export files, including audio assets. Audio-disabled finalisation omitted all audio assets.
+- Course voice and section narration survived project normalization/import.
+- Player DOM-double tests covered disabled sections, chosen voice, generation state, cached replay, one-at-a-time playback, speed, Stop/cancellation and object-URL cleanup.
+- Existing wizard, reordering, formatting and all eleven interaction simulation checks passed.
+
+Not verified: actual browser audio output, pronunciation quality, full browser/service-worker lifecycle, mobile performance and destination LMS/CSP acceptance.
+
+Manual acceptance:
+
+1. In Modules, generate audio for Essential and each tier; pause, seek, change speed, stop and replay.
+2. Change voice and spoken text; confirm the next clip uses the update. Save JSON and re-import it.
+3. Test in the separate player, then navigate away during playback and confirm it stops.
+4. Export and upload to the intended LMS; confirm audio works with external network requests blocked.
+5. Disable course audio and export again; confirm no audio files or controls appear.
