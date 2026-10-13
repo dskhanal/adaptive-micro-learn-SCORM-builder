@@ -1,25 +1,10 @@
 {
   "name": "adaptive-micro-learn-scorm-builder",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "private": true,
   "type": "module",
-  "description": "Create, validate, preview and export adaptive SCORM 2004 learning packages.",
+  "description": "Static SCORM authoring, finalisation and folder testing",
   "scripts": {
-    "dev": "tsx server.ts",
-    "build": "tsc",
-    "start": "node server.ts",
-    "lint": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@types/adm-zip": "^0.6.0",
-    "@types/multer": "^2.3.0",
-    "adm-zip": "^0.6.1",
-    "express": "^4.21.2",
-    "multer": "^2.4.0"
-  },
-  "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.10.1",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "start": "python3 -m http.server 8000"
   }
 }

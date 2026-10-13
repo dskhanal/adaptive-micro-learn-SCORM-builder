@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Finalised SCORM folder test</title>
+<style>
+body{margin:0;font:15px system-ui;background:#f4f7fa;color:#172b3b}header{padding:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}button,a,label{font:inherit}button,.file{padding:9px 12px;border:1px solid #64748b;border-radius:6px;background:white;cursor:pointer}#status{padding:12px 18px;background:#e2eaf0}iframe{width:100%;height:70vh;border:0;background:white}details{padding:12px}pre{white-space:pre-wrap}input{max-width:220px}
+</style>
+<header><a href="./index.html">← Builder</a><strong id="title">Finalised SCORM folder test</strong>
+<label class="file">Load SCORM folder <input id="folder" type="file" webkitdirectory multiple></label>
+<button id="save" disabled>Save finalised folder</button><button id="restart" disabled>New attempt</button><button id="resume" disabled>Resume attempt</button><button id="report">Download test data</button></header>
+<div id="status" role="status">Finalise a course in the builder or select an extracted SCORM folder. Files stay in this browser.</div>
+<iframe id="course" title="Finalised SCORM course" allow="fullscreen"></iframe>
+<details><summary>Recorded SCORM calls</summary><pre id="log"></pre></details>
+<script src="./package-store.js"></script><script src="./test-player.js"></script></html>
